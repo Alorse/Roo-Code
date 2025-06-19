@@ -61,6 +61,7 @@ export interface ExtensionMessage {
 		| "enhancedPrompt"
 		| "commitSearchResults"
 		| "listApiConfig"
+		| "apiConfigurationById"
 		| "routerModels"
 		| "openAiModels"
 		| "ollamaModels"
@@ -128,6 +129,7 @@ export interface ExtensionMessage {
 	mcpServers?: McpServer[]
 	commits?: GitCommit[]
 	listApiConfig?: ProviderSettingsEntry[]
+	apiConfigById?: ProviderSettings
 	mode?: Mode
 	customMode?: ModeConfig
 	slug?: string
