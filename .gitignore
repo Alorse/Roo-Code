@@ -45,3 +45,6 @@ logs
 .qodo/
 .vercel
 .roo/mcp.json
+
+# Ignore copilot instructions file
+.github/copilot-instructions.md
