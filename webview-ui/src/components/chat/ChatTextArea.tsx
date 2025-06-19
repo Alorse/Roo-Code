@@ -80,6 +80,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 			taskHistory,
 			clineMessages,
 			codebaseIndexConfig,
+			apiConfiguration,
 		} = useExtensionState()
 
 		// Find the ID and display text for the currently selected API configuration
@@ -90,6 +91,45 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 				displayName: currentApiConfigName || "", // Use the name directly for display
 			}
 		}, [listApiConfigMeta, currentApiConfigName])
+
+		// Function to get model ID from provider configuration
+		const getModelIdForProvider = useCallback((settings: any, provider: string): string | undefined => {
+			switch (provider) {
+				case "openrouter":
+					return settings.openRouterModelId
+				case "glama":
+					return settings.glamaModelId
+				case "unbound":
+					return settings.unboundModelId
+				case "requesty":
+					return settings.requestyModelId
+				case "litellm":
+					return settings.litellmModelId
+				case "openai":
+					return settings.openAiModelId
+				case "ollama":
+					return settings.ollamaModelId
+				case "lmstudio":
+					return settings.lmStudioModelId
+				case "vscode-lm":
+					return settings.vsCodeLmModelSelector?.id
+				default:
+					return settings.apiModelId
+			}
+		}, [])
+
+		// Helper function to get model display name
+		const getModelDisplayName = useCallback((config: any) => {
+			console.error("apiConfiguration", apiConfiguration);
+			// If this is the current configuration, get the model from apiConfiguration
+			if (config.id === currentConfigId && apiConfiguration) {
+				const modelId = getModelIdForProvider(apiConfiguration, config.apiProvider || '')
+				return modelId || 'Default'
+			}
+			// For other configurations, we can't get the model without their full settings
+			// So just show the provider name or Unknown
+			return config.apiProvider || 'Unknown'
+		}, [currentConfigId, apiConfiguration, getModelIdForProvider])
 
 		const [gitCommits, setGitCommits] = useState<any[]>([])
 		const [showDropdown, setShowDropdown] = useState(false)
@@ -1044,7 +1084,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 										.filter((config) => pinnedApiConfigs && pinnedApiConfigs[config.id])
 										.map((config) => ({
 											value: config.id,
-											label: config.name,
+											label: `${config.name}: ${getModelDisplayName(config)}`,
 											name: config.name, // Keep name for comparison with currentApiConfigName.
 											type: DropdownOptionType.ITEM,
 											pinned: true,
@@ -1067,7 +1107,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 										.filter((config) => !pinnedApiConfigs || !pinnedApiConfigs[config.id])
 										.map((config) => ({
 											value: config.id,
-											label: config.name,
+											label: `${config.name}: ${getModelDisplayName(config)}`,
 											name: config.name, // Keep name for comparison with currentApiConfigName.
 											type: DropdownOptionType.ITEM,
 											pinned: false,
