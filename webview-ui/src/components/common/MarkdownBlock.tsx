@@ -136,13 +136,13 @@ const StyledMarkdown = styled.div`
 		"Helvetica Neue",
 		sans-serif;
 
-	font-size: var(--vscode-font-size, 13px);
+	font-size: var(--text-base);
 
 	p,
 	li,
 	ol,
 	ul {
-		line-height: 1.25;
+		line-height: 1.4;
 	}
 
 	ol,
