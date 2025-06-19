@@ -80,10 +80,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 			taskHistory,
 			clineMessages,
 			codebaseIndexConfig,
-			apiConfiguration,
 		} = useExtensionState()
-
-		console.log("listApiConfigMeta:", listApiConfigMeta, apiConfiguration)
 
 		// State to store configurations fetched by ID
 		const [fetchedConfigurations, setFetchedConfigurations] = useState<Record<string, any>>({})
