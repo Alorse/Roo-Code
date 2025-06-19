@@ -1236,6 +1236,29 @@ export const webviewMessageHandler = async (
 				}
 			}
 			break
+		case "getApiConfigurationById":
+			if (message.text) {
+				try {
+					const { name: _, ...providerSettings } = await provider.providerSettingsManager.getProfile({
+						id: message.text,
+					})
+					provider.postMessageToWebview({
+						type: "apiConfigurationById",
+						apiConfigById: providerSettings,
+						values: { configId: message.text },
+					})
+				} catch (error) {
+					provider.log(
+						`Error get api configuration by ID: ${JSON.stringify(error, Object.getOwnPropertyNames(error), 2)}`,
+					)
+					provider.postMessageToWebview({
+						type: "apiConfigurationById",
+						apiConfigById: undefined,
+						values: { configId: message.text, error: error.message },
+					})
+				}
+			}
+			break
 		case "deleteApiConfiguration":
 			if (message.text) {
 				const answer = await vscode.window.showInformationMessage(

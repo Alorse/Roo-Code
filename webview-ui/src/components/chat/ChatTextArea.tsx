@@ -83,6 +83,11 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 			apiConfiguration,
 		} = useExtensionState()
 
+		console.log("listApiConfigMeta:", listApiConfigMeta, apiConfiguration)
+
+		// State to store configurations fetched by ID
+		const [fetchedConfigurations, setFetchedConfigurations] = useState<Record<string, any>>({})
+
 		// Find the ID and display text for the currently selected API configuration
 		const { currentConfigId, displayName } = useMemo(() => {
 			const currentConfig = listApiConfigMeta?.find((config) => config.name === currentApiConfigName)
@@ -119,17 +124,25 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 		}, [])
 
 		// Helper function to get model display name
-		const getModelDisplayName = useCallback((config: any) => {
-			console.error("apiConfiguration", apiConfiguration);
-			// If this is the current configuration, get the model from apiConfiguration
-			if (config.id === currentConfigId && apiConfiguration) {
-				const modelId = getModelIdForProvider(apiConfiguration, config.apiProvider || '')
-				return modelId || 'Default'
-			}
-			// For other configurations, we can't get the model without their full settings
-			// So just show the provider name or Unknown
-			return config.apiProvider || 'Unknown'
-		}, [currentConfigId, apiConfiguration, getModelIdForProvider])
+		const getModelDisplayName = useCallback(
+			(config: any) => {
+				// Check if we have fetched this configuration
+				const fetchedConfig = fetchedConfigurations[config.id]
+				if (fetchedConfig) {
+					const modelId = getModelIdForProvider(fetchedConfig, config.apiProvider || "")
+					return modelId || "Default"
+				}
+
+				// If we don't have the configuration, request it
+				vscode.postMessage({ type: "getApiConfigurationById", text: config.id })
+
+				// For other configurations, show a placeholder that indicates we need to select it to see the model
+				const provider = config.apiProvider || "Unknown"
+
+				return `${provider} Model`
+			},
+			[getModelIdForProvider, fetchedConfigurations],
+		)
 
 		const [gitCommits, setGitCommits] = useState<any[]>([])
 		const [showDropdown, setShowDropdown] = useState(false)
@@ -174,6 +187,14 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 					setSearchLoading(false)
 					if (message.requestId === searchRequestId) {
 						setFileSearchResults(message.results || [])
+					}
+				} else if (message.type === "apiConfigurationById") {
+					// Handle received API configuration
+					if (message.apiConfigById && message.values?.configId) {
+						setFetchedConfigurations((prev) => ({
+							...prev,
+							[message.values.configId]: message.apiConfigById,
+						}))
 					}
 				}
 			}
