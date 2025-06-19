@@ -54,7 +54,6 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 			setInputValue,
 			sendingDisabled,
 			selectApiConfigDisabled,
-			placeholderText,
 			selectedImages,
 			setSelectedImages,
 			onSend,
@@ -833,7 +832,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 			}
 		})
 
-		const placeholderBottomText = `\n(${t("chat:addContext")}${shouldDisableImages ? `, ${t("chat:dragFiles")}` : `, ${t("chat:dragFilesImages")}`})`
+		const placeholderBottomText = `${t("chat:addContext")}${shouldDisableImages ? `, ${t("chat:dragFiles")}` : `, ${t("chat:dragFilesImages")}`}`
 
 		return (
 			<div
@@ -842,7 +841,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 					"flex",
 					"flex-col",
 					"gap-2",
-					"bg-editor-background",
+					"bg-vscode-input-background",
 					"m-2 mt-1",
 					"p-1.5",
 					"outline-none",
@@ -969,8 +968,8 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 
 									onHeightChange?.(height)
 								}}
-								placeholder={placeholderText}
-								minRows={3}
+								placeholder={placeholderBottomText}
+								minRows={1}
 								maxRows={15}
 								autoFocus={true}
 								className={cn(
@@ -991,7 +990,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 										: "bg-vscode-input-background",
 									"transition-background-color duration-150 ease-in-out",
 									"will-change-background-color",
-									"min-h-[90px]",
+									"min-h-[30px]",
 									"box-border",
 									"rounded",
 									"resize-none",
@@ -1013,28 +1012,6 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 									onClick={() => vscode.postMessage({ type: "stopTts" })}>
 									<VolumeX className="size-4" />
 								</Button>
-							)}
-
-							{!inputValue && (
-								<div
-									className={cn(
-										"absolute",
-										"left-2",
-										"flex",
-										"gap-2",
-										"text-xs",
-										"text-descriptionForeground",
-										"pointer-events-none",
-										"z-25",
-										"bottom-1.5",
-										"pr-2",
-										"transition-opacity",
-										"duration-200",
-										"ease-in-out",
-										"opacity-70",
-									)}>
-									{placeholderBottomText}
-								</div>
 							)}
 						</div>
 					</div>

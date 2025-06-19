@@ -988,9 +988,21 @@ export const ChatRowContent = ({
 				case "user_feedback":
 					return (
 						<div className="w-[90%] flex justify-end mx-auto mr-0">
-							<div className="rounded-lg p-1 overflow-hidden whitespace-pre-wrap w-full" style={{ backgroundColor: "color-mix(in srgb, var(--vscode-button-background) 20%, transparent)", border: "1px solid color-mix(in srgb, var(--vscode-button-background) 20%, transparent)" }}>
+							<div
+								className="rounded-lg p-1 overflow-hidden whitespace-pre-wrap w-full"
+								style={{
+									backgroundColor:
+										"color-mix(in srgb, var(--vscode-button-background) 20%, transparent)",
+									border: "1px solid color-mix(in srgb, var(--vscode-button-background) 20%, transparent)",
+								}}>
 								<div className="flex justify-between">
-									<div className="flex-grow px-2 py-1 wrap-anywhere" style={{ color: "var(--vscode-list-activeSelectionForeground)", fontSize: "var(--text-lx)", lineHeight: "1.6" }}>
+									<div
+										className="flex-grow px-2 py-1 wrap-anywhere"
+										style={{
+											color: "var(--vscode-list-activeSelectionForeground)",
+											fontSize: "var(--text-lx)",
+											lineHeight: "1.6",
+										}}>
 										<Mention text={message.text} withShadow />
 									</div>
 									<Button
@@ -1002,7 +1014,10 @@ export const ChatRowContent = ({
 											e.stopPropagation()
 											vscode.postMessage({ type: "deleteMessage", value: message.ts })
 										}}>
-										<span className="codicon codicon-trash" style={{ color: "var(--vscode-foreground)" }} />
+										<span
+											className="codicon codicon-trash"
+											style={{ color: "var(--vscode-foreground)" }}
+										/>
 									</Button>
 								</div>
 								{message.images && message.images.length > 0 && (
@@ -1043,16 +1058,18 @@ export const ChatRowContent = ({
 								{icon}
 								{title}
 							</div>
-							<div style={{ 
-								backgroundColor: "color-mix(in srgb, var(--vscode-button-background) 10%, transparent)", 
-								color: "var(--vscode-list-activeSelectionForeground)", 
-								paddingTop: 10, 
-								padding: "10px", 
-								borderRadius: "6px",
-								border: "1px solid color-mix(in srgb, var(--vscode-button-background) 20%, transparent)",
-								fontSize: "calc(var(--vscode-font-size) * 1.25)",
-								lineHeight: "1.6"
-							}}>
+							<div
+								style={{
+									backgroundColor:
+										"color-mix(in srgb, var(--vscode-button-background) 10%, transparent)",
+									color: "var(--vscode-list-activeSelectionForeground)",
+									paddingTop: 10,
+									padding: "10px",
+									borderRadius: "6px",
+									border: "1px solid color-mix(in srgb, var(--vscode-button-background) 20%, transparent)",
+									fontSize: "calc(var(--vscode-font-size) * 1.25)",
+									lineHeight: "1.6",
+								}}>
 								<Markdown markdown={message.text} />
 							</div>
 						</>
