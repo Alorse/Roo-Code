@@ -1074,6 +1074,7 @@ export const ChatRowContent = ({
 								style={{
 									backgroundColor:
 										"color-mix(in srgb, var(--vscode-button-background) 10%, transparent)",
+									color: "var(--vscode-list-activeSelectionForeground)",
 									paddingTop: 10,
 									padding: "10px",
 									borderRadius: "6px",
