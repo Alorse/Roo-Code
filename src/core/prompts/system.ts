@@ -149,11 +149,6 @@ async function generatePrompt(
 
 	const basePrompt = promptSections.filter((section) => section && section.trim()).join("\n\n")
 
-	console.log("promptSettings.markdownFormattingEnabled", promptSettings.markdownFormattingEnabled)
-	console.log("promptSettings.toolUseEnabled", promptSettings.toolUseEnabled)
-	console.log("systemPromptSettings", systemPromptSettings)
-	console.log("Generated system prompt:", basePrompt)
-
 	return basePrompt
 }
 
