@@ -64,6 +64,7 @@ export interface ExtensionMessage {
 		| "vsCodeLmApiAvailable"
 		| "updatePrompt"
 		| "systemPrompt"
+		| "systemPromptSettings"
 		| "autoApprovalEnabled"
 		| "updateCustomMode"
 		| "deleteCustomMode"
@@ -204,6 +205,7 @@ export type ExtensionState = Pick<
 	| "enhancementApiConfigId"
 	| "condensingApiConfigId"
 	| "customCondensingPrompt"
+	| "systemPromptSettings"
 	| "codebaseIndexConfig"
 	| "codebaseIndexModels"
 > & {

@@ -7,6 +7,7 @@ import {
 	type ModeConfig,
 	type ExperimentId,
 	type OrganizationAllowList,
+	type SystemPromptSettings,
 	ORGANIZATION_ALLOW_ALL,
 } from "@roo-code/types"
 
@@ -42,6 +43,9 @@ export interface ExtensionStateContextType extends ExtensionState {
 	setCondensingApiConfigId: (value: string) => void
 	customCondensingPrompt?: string
 	setCustomCondensingPrompt: (value: string) => void
+	// System prompt settings
+	systemPromptSettings?: SystemPromptSettings
+	setSystemPromptSettings: (value: SystemPromptSettings) => void
 	setApiConfiguration: (config: ProviderSettings) => void
 	setCustomInstructions: (value?: string) => void
 	setAlwaysAllowReadOnly: (value: boolean) => void
@@ -199,6 +203,18 @@ export const ExtensionStateContextProvider: React.FC<{ children: React.ReactNode
 		organizationAllowList: ORGANIZATION_ALLOW_ALL,
 		autoCondenseContext: true,
 		autoCondenseContextPercent: 100,
+		systemPromptSettings: {
+			markdownFormattingEnabled: true,
+			toolUseEnabled: true,
+			toolUseGuidelinesEnabled: true,
+			mcpServersEnabled: true,
+			capabilitiesEnabled: true,
+			modesEnabled: true,
+			rulesEnabled: true,
+			systemInfoEnabled: true,
+			objectiveEnabled: true,
+			customInstructionsEnabled: true,
+		},
 		codebaseIndexConfig: {
 			codebaseIndexEnabled: false,
 			codebaseIndexQdrantUrl: "http://localhost:6333",
@@ -404,6 +420,7 @@ export const ExtensionStateContextProvider: React.FC<{ children: React.ReactNode
 		setCondensingApiConfigId: (value) => setState((prevState) => ({ ...prevState, condensingApiConfigId: value })),
 		setCustomCondensingPrompt: (value) =>
 			setState((prevState) => ({ ...prevState, customCondensingPrompt: value })),
+		setSystemPromptSettings: (value) => setState((prevState) => ({ ...prevState, systemPromptSettings: value })),
 	}
 
 	return <ExtensionStateContext.Provider value={contextValue}>{children}</ExtensionStateContext.Provider>

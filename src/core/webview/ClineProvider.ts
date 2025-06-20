@@ -1335,6 +1335,7 @@ export class ClineProvider
 			customCondensingPrompt,
 			codebaseIndexConfig,
 			codebaseIndexModels,
+			systemPromptSettings,
 		} = await this.getState()
 
 		const telemetryKey = process.env.POSTHOG_API_KEY
@@ -1449,6 +1450,18 @@ export class ClineProvider
 				codebaseIndexEmbedderProvider: "openai",
 				codebaseIndexEmbedderBaseUrl: "",
 				codebaseIndexEmbedderModelId: "",
+			},
+			systemPromptSettings: systemPromptSettings ?? {
+				markdownFormattingEnabled: true,
+				toolUseEnabled: true,
+				toolUseGuidelinesEnabled: true,
+				mcpServersEnabled: true,
+				capabilitiesEnabled: true,
+				modesEnabled: true,
+				rulesEnabled: true,
+				systemInfoEnabled: true,
+				objectiveEnabled: true,
+				customInstructionsEnabled: true,
 			},
 			mdmCompliant: this.checkMdmCompliance(),
 		}
@@ -1599,6 +1612,18 @@ export class ClineProvider
 				codebaseIndexEmbedderProvider: "openai",
 				codebaseIndexEmbedderBaseUrl: "",
 				codebaseIndexEmbedderModelId: "",
+			},
+			systemPromptSettings: stateValues.systemPromptSettings ?? {
+				markdownFormattingEnabled: true,
+				toolUseEnabled: true,
+				toolUseGuidelinesEnabled: true,
+				mcpServersEnabled: true,
+				capabilitiesEnabled: true,
+				modesEnabled: true,
+				rulesEnabled: true,
+				systemInfoEnabled: true,
+				objectiveEnabled: true,
+				customInstructionsEnabled: true,
 			},
 		}
 	}

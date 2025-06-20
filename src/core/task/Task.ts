@@ -1600,6 +1600,7 @@ export class Task extends EventEmitter<ClineEvents> {
 			language,
 			maxConcurrentFileReads,
 			maxReadFileLine,
+			systemPromptSettings,
 		} = state ?? {}
 
 		return await (async () => {
@@ -1629,6 +1630,7 @@ export class Task extends EventEmitter<ClineEvents> {
 				{
 					maxConcurrentFileReads,
 				},
+				systemPromptSettings,
 			)
 		})()
 	}

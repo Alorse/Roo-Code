@@ -33,6 +33,7 @@
 		"checkpoint_failed": "Failed to restore checkpoint.",
 		"no_workspace": "Please open a project folder first",
 		"update_support_prompt": "Failed to update support prompt",
+		"update_system_prompt_settings": "Failed to update system prompt settings",
 		"reset_support_prompt": "Failed to reset support prompt",
 		"enhance_prompt": "Failed to enhance prompt",
 		"get_system_prompt": "Failed to get system prompt",

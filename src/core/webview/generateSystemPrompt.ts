@@ -24,6 +24,7 @@ export const generateSystemPrompt = async (provider: ClineProvider, message: Web
 		language,
 		maxReadFileLine,
 		maxConcurrentFileReads,
+		systemPromptSettings,
 	} = await provider.getState()
 
 	// Check experiment to determine which diff strategy to use
@@ -83,6 +84,7 @@ export const generateSystemPrompt = async (provider: ClineProvider, message: Web
 		{
 			maxConcurrentFileReads,
 		},
+		systemPromptSettings,
 	)
 
 	return systemPrompt

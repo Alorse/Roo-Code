@@ -19,6 +19,21 @@ import { languagesSchema } from "./vscode.js"
  * GlobalSettings
  */
 
+export const systemPromptSettingsSchema = z
+	.object({
+		markdownFormattingEnabled: z.boolean().optional(),
+		toolUseEnabled: z.boolean().optional(),
+		toolUseGuidelinesEnabled: z.boolean().optional(),
+		mcpServersEnabled: z.boolean().optional(),
+		capabilitiesEnabled: z.boolean().optional(),
+		modesEnabled: z.boolean().optional(),
+		rulesEnabled: z.boolean().optional(),
+		systemInfoEnabled: z.boolean().optional(),
+		objectiveEnabled: z.boolean().optional(),
+		customInstructionsEnabled: z.boolean().optional(),
+	})
+	.optional()
+
 export const globalSettingsSchema = z.object({
 	currentApiConfigName: z.string().optional(),
 	listApiConfigMeta: z.array(providerSettingsEntrySchema).optional(),
@@ -30,6 +45,8 @@ export const globalSettingsSchema = z.object({
 
 	condensingApiConfigId: z.string().optional(),
 	customCondensingPrompt: z.string().optional(),
+
+	systemPromptSettings: systemPromptSettingsSchema,
 
 	autoApprovalEnabled: z.boolean().optional(),
 	alwaysAllowReadOnly: z.boolean().optional(),
@@ -106,6 +123,7 @@ export const globalSettingsSchema = z.object({
 })
 
 export type GlobalSettings = z.infer<typeof globalSettingsSchema>
+export type SystemPromptSettings = z.infer<typeof systemPromptSettingsSchema>
 
 export const GLOBAL_SETTINGS_KEYS = globalSettingsSchema.keyof().options
 

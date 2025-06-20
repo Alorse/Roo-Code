@@ -850,6 +850,22 @@ export const webviewMessageHandler = async (
 				vscode.window.showErrorMessage(t("common:errors.update_support_prompt"))
 			}
 			break
+		case "systemPromptSettings":
+			try {
+				if (!message?.values) {
+					return
+				}
+
+				// Update system prompt settings with the new values from the cached state
+				await updateGlobalState("systemPromptSettings", message.values)
+				await provider.postStateToWebview()
+			} catch (error) {
+				provider.log(
+					`Error updating system prompt settings: ${JSON.stringify(error, Object.getOwnPropertyNames(error), 2)}`,
+				)
+				vscode.window.showErrorMessage(t("common:errors.update_system_prompt_settings"))
+			}
+			break
 		case "updatePrompt":
 			if (message.promptMode && message.customPrompt !== undefined) {
 				const existingPrompts = getGlobalState("customModePrompts") ?? {}

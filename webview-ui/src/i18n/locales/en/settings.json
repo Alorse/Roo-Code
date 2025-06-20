@@ -34,7 +34,51 @@
 		"about": "About Roo Code"
 	},
 	"prompts": {
-		"description": "Configure support prompts that are used for quick actions like enhancing prompts, explaining code, and fixing issues. These prompts help Roo provide better assistance for common development tasks."
+		"description": "Configure support prompts that are used for quick actions like enhancing prompts, explaining code, and fixing issues. These prompts help Roo provide better assistance for common development tasks.",
+		"systemPrompts": {
+			"title": "System Prompt Components",
+			"description": "Control which components are included in the system prompt. Disabling components can reduce token usage but may affect Roo's capabilities.",
+			"markdownFormattingEnabled": {
+				"label": "Markdown Formatting Rules",
+				"description": "Include rules for formatting code references and file links in responses."
+			},
+			"toolUseEnabled": {
+				"label": "Tool Use Instructions",
+				"description": "Include basic tool usage formatting and guidelines."
+			},
+			"toolUseGuidelinesEnabled": {
+				"label": "Tool Use Guidelines",
+				"description": "Include detailed guidelines for effective tool usage and workflow."
+			},
+			"mcpServersEnabled": {
+				"label": "MCP Servers Information",
+				"description": "Include information about connected MCP servers and their capabilities."
+			},
+			"capabilitiesEnabled": {
+				"label": "Capabilities Description",
+				"description": "Include description of Roo's available tools and capabilities."
+			},
+			"modesEnabled": {
+				"label": "Modes Information",
+				"description": "Include information about available modes and when to use them."
+			},
+			"rulesEnabled": {
+				"label": "Operating Rules",
+				"description": "Include rules about file paths, project structure, and operational constraints."
+			},
+			"systemInfoEnabled": {
+				"label": "System Information",
+				"description": "Include information about the operating system, shell, and workspace directory."
+			},
+			"objectiveEnabled": {
+				"label": "Task Objectives",
+				"description": "Include instructions on how to approach and complete tasks methodically."
+			},
+			"customInstructionsEnabled": {
+				"label": "Custom Instructions",
+				"description": "Include user-defined custom instructions and language preferences."
+			}
+		}
 	},
 	"codeIndex": {
 		"title": "Codebase Indexing",
@@ -615,5 +659,8 @@
 		"useCustomArn": "Use custom ARN..."
 	},
 	"includeMaxOutputTokens": "Include max output tokens",
-	"includeMaxOutputTokensDescription": "Send max output tokens parameter in API requests. Some providers may not support this."
+	"includeMaxOutputTokensDescription": "Send max output tokens parameter in API requests. Some providers may not support this.",
+	"errors": {
+		"update_system_prompt_settings": "Failed to update system prompt settings"
+	}
 }

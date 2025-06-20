@@ -44,6 +44,7 @@ async function generatePrompt(
 	rooIgnoreInstructions?: string,
 	partialReadsEnabled?: boolean,
 	settings?: Record<string, any>,
+	systemPromptSettings?: any,
 ): Promise<string> {
 	if (!context) {
 		throw new Error("Extension context is required for generating system prompt")
@@ -65,41 +66,93 @@ async function generatePrompt(
 
 	const codeIndexManager = CodeIndexManager.getInstance(context)
 
-	const basePrompt = `${roleDefinition}
+	// Default system prompt settings (all enabled by default)
+	const defaultSettings = {
+		markdownFormattingEnabled: true,
+		toolUseEnabled: true,
+		toolUseGuidelinesEnabled: true,
+		mcpServersEnabled: true,
+		capabilitiesEnabled: true,
+		modesEnabled: true,
+		rulesEnabled: true,
+		systemInfoEnabled: true,
+		objectiveEnabled: true,
+		customInstructionsEnabled: true,
+	}
 
-${markdownFormattingSection()}
+	const promptSettings = { ...defaultSettings, ...systemPromptSettings }
 
-${getSharedToolUseSection()}
+	// Build prompt sections conditionally based on settings
+	let promptSections = [`${roleDefinition}`]
 
-${getToolDescriptionsForMode(
-	mode,
-	cwd,
-	supportsComputerUse,
-	codeIndexManager,
-	effectiveDiffStrategy,
-	browserViewportSize,
-	mcpHub,
-	customModeConfigs,
-	experiments,
-	partialReadsEnabled,
-	settings,
-)}
+	if (promptSettings.markdownFormattingEnabled) {
+		promptSections.push(markdownFormattingSection())
+	}
 
-${getToolUseGuidelinesSection(codeIndexManager)}
+	if (promptSettings.toolUseEnabled) {
+		promptSections.push(getSharedToolUseSection())
+		promptSections.push(
+			getToolDescriptionsForMode(
+				mode,
+				cwd,
+				supportsComputerUse,
+				codeIndexManager,
+				effectiveDiffStrategy,
+				browserViewportSize,
+				mcpHub,
+				customModeConfigs,
+				experiments,
+				partialReadsEnabled,
+				settings,
+			),
+		)
+	}
 
-${mcpServersSection}
+	if (promptSettings.toolUseGuidelinesEnabled) {
+		promptSections.push(getToolUseGuidelinesSection(codeIndexManager))
+	}
 
-${getCapabilitiesSection(cwd, supportsComputerUse, mcpHub, effectiveDiffStrategy, codeIndexManager)}
+	if (promptSettings.mcpServersEnabled) {
+		promptSections.push(mcpServersSection)
+	}
 
-${modesSection}
+	if (promptSettings.capabilitiesEnabled) {
+		promptSections.push(
+			getCapabilitiesSection(cwd, supportsComputerUse, mcpHub, effectiveDiffStrategy, codeIndexManager),
+		)
+	}
 
-${getRulesSection(cwd, supportsComputerUse, effectiveDiffStrategy, codeIndexManager)}
+	if (promptSettings.modesEnabled) {
+		promptSections.push(modesSection)
+	}
 
-${getSystemInfoSection(cwd)}
+	if (promptSettings.rulesEnabled) {
+		promptSections.push(getRulesSection(cwd, supportsComputerUse, effectiveDiffStrategy, codeIndexManager))
+	}
 
-${getObjectiveSection(codeIndexManager, experiments)}
+	if (promptSettings.systemInfoEnabled) {
+		promptSections.push(getSystemInfoSection(cwd))
+	}
 
-${await addCustomInstructions(baseInstructions, globalCustomInstructions || "", cwd, mode, { language: language ?? formatLanguage(vscode.env.language), rooIgnoreInstructions })}`
+	if (promptSettings.objectiveEnabled) {
+		promptSections.push(getObjectiveSection(codeIndexManager, experiments))
+	}
+
+	if (promptSettings.customInstructionsEnabled) {
+		promptSections.push(
+			await addCustomInstructions(baseInstructions, globalCustomInstructions || "", cwd, mode, {
+				language: language ?? formatLanguage(vscode.env.language),
+				rooIgnoreInstructions,
+			}),
+		)
+	}
+
+	const basePrompt = promptSections.filter((section) => section && section.trim()).join("\n\n")
+
+	console.log("promptSettings.markdownFormattingEnabled", promptSettings.markdownFormattingEnabled)
+	console.log("promptSettings.toolUseEnabled", promptSettings.toolUseEnabled)
+	console.log("systemPromptSettings", systemPromptSettings)
+	console.log("Generated system prompt:", basePrompt)
 
 	return basePrompt
 }
@@ -122,6 +175,7 @@ export const SYSTEM_PROMPT = async (
 	rooIgnoreInstructions?: string,
 	partialReadsEnabled?: boolean,
 	settings?: Record<string, any>,
+	systemPromptSettings?: any,
 ): Promise<string> => {
 	if (!context) {
 		throw new Error("Extension context is required for generating system prompt")
@@ -195,5 +249,6 @@ ${customInstructions}`
 		rooIgnoreInstructions,
 		partialReadsEnabled,
 		settings,
+		systemPromptSettings,
 	)
 }

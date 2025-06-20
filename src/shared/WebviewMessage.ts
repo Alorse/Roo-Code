@@ -119,6 +119,7 @@ export interface WebviewMessage {
 		| "mode"
 		| "updatePrompt"
 		| "updateSupportPrompt"
+		| "systemPromptSettings"
 		| "getSystemPrompt"
 		| "copySystemPrompt"
 		| "systemPrompt"
