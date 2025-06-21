@@ -24,6 +24,7 @@ import {
 	getModesSection,
 	addCustomInstructions,
 	markdownFormattingSection,
+	loadPromptSection,
 } from "./sections"
 
 async function generatePrompt(
@@ -38,7 +39,7 @@ async function generatePrompt(
 	customModeConfigs?: ModeConfig[],
 	globalCustomInstructions?: string,
 	diffEnabled?: boolean,
-	experiments?: Record<string, boolean>,
+	experiments?: Record<string, boolean> | import("@roo-code/types").Experiments,
 	enableMcpServerCreation?: boolean,
 	language?: string,
 	rooIgnoreInstructions?: string,
@@ -89,8 +90,12 @@ async function generatePrompt(
 		promptSections.push(markdownFormattingSection())
 	}
 
+	// Load sections dynamically based on experiments
+	const experimentsTyped = experiments as import("@roo-code/types").Experiments | undefined
+
 	if (promptSettings.toolUseEnabled) {
-		promptSections.push(getSharedToolUseSection())
+		const toolUseModule = loadPromptSection(experimentsTyped, "tool-use")
+		promptSections.push(toolUseModule.getSharedToolUseSection())
 		promptSections.push(
 			getToolDescriptionsForMode(
 				mode,
@@ -109,7 +114,8 @@ async function generatePrompt(
 	}
 
 	if (promptSettings.toolUseGuidelinesEnabled) {
-		promptSections.push(getToolUseGuidelinesSection(codeIndexManager))
+		const toolUseGuidelinesModule = loadPromptSection(experimentsTyped, "tool-use-guidelines")
+		promptSections.push(toolUseGuidelinesModule.getToolUseGuidelinesSection(codeIndexManager))
 	}
 
 	if (promptSettings.mcpServersEnabled) {
@@ -117,8 +123,15 @@ async function generatePrompt(
 	}
 
 	if (promptSettings.capabilitiesEnabled) {
+		const capabilitiesModule = loadPromptSection(experimentsTyped, "capabilities")
 		promptSections.push(
-			getCapabilitiesSection(cwd, supportsComputerUse, mcpHub, effectiveDiffStrategy, codeIndexManager),
+			capabilitiesModule.getCapabilitiesSection(
+				cwd,
+				supportsComputerUse,
+				mcpHub,
+				effectiveDiffStrategy,
+				codeIndexManager,
+			),
 		)
 	}
 
@@ -127,15 +140,20 @@ async function generatePrompt(
 	}
 
 	if (promptSettings.rulesEnabled) {
-		promptSections.push(getRulesSection(cwd, supportsComputerUse, effectiveDiffStrategy, codeIndexManager))
+		const rulesModule = loadPromptSection(experimentsTyped, "rules")
+		promptSections.push(
+			rulesModule.getRulesSection(cwd, supportsComputerUse, effectiveDiffStrategy, codeIndexManager),
+		)
 	}
 
 	if (promptSettings.systemInfoEnabled) {
-		promptSections.push(getSystemInfoSection(cwd))
+		const systemInfoModule = loadPromptSection(experimentsTyped, "system-info")
+		promptSections.push(systemInfoModule.getSystemInfoSection(cwd))
 	}
 
 	if (promptSettings.objectiveEnabled) {
-		promptSections.push(getObjectiveSection(codeIndexManager, experiments))
+		const objectiveModule = loadPromptSection(experimentsTyped, "objective")
+		promptSections.push(objectiveModule.getObjectiveSection(codeIndexManager, experiments))
 	}
 
 	if (promptSettings.customInstructionsEnabled) {

@@ -8,3 +8,6 @@ export { getToolUseGuidelinesSection } from "./tool-use-guidelines"
 export { getCapabilitiesSection } from "./capabilities"
 export { getModesSection } from "./modes"
 export { markdownFormattingSection } from "./markdown-formatting"
+
+// Dynamic loading functionality (for future use)
+export { loadPromptSection } from "./prompt-loader"
