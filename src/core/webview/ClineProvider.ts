@@ -1648,6 +1648,7 @@ export class ClineProvider
 				codebaseIndexEmbedderModelId: "",
 			},
 			systemPromptSettings: stateValues.systemPromptSettings, // <-- Add this line
+			profileThresholds: stateValues.profileThresholds, // <-- Add this line to expose profileThresholds
 		}
 	}
 
