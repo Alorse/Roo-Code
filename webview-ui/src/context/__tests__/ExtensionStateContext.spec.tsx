@@ -225,6 +225,7 @@ describe("mergeExtensionState", () => {
 				disableCompletionCommand: false,
 				concurrentFileReads: true,
 				multiFileApplyDiff: true,
+				optimizedPromptFeatures: true,
 			} as Record<ExperimentId, boolean>,
 		}
 
