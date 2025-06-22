@@ -16,7 +16,7 @@ interface CodeAccordianProps {
 	isExpanded: boolean
 	isFeedback?: boolean
 	onToggleExpand: () => void
-	header?: string
+	header?: React.ReactNode
 }
 
 const CodeAccordian = ({
@@ -41,7 +41,6 @@ const CodeAccordian = ({
 					{isLoading && <VSCodeProgressRing className="size-3 mr-2" />}
 					{header ? (
 						<div className="flex items-center">
-							<span className="codicon codicon-server mr-1.5"></span>
 							<span className="whitespace-nowrap overflow-hidden text-ellipsis mr-2">{header}</span>
 						</div>
 					) : isFeedback ? (

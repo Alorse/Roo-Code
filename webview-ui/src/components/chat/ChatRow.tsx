@@ -166,7 +166,7 @@ export const ChatRowContent = ({
 							className="codicon codicon-terminal"
 							style={{ color: normalColor, marginBottom: "-1.5px" }}></span>
 					),
-					<span style={{ color: normalColor, fontWeight: "bold" }}>{t("chat:runCommand.title")}:</span>,
+					<span>{t("chat:runCommand.title")}:</span>,
 				]
 			case "use_mcp_server":
 				const mcpServerUse = safeJsonParse<ClineAskUseMcpServer>(message.text)
@@ -181,7 +181,7 @@ export const ChatRowContent = ({
 							className="codicon codicon-server"
 							style={{ color: normalColor, marginBottom: "-1.5px" }}></span>
 					),
-					<span style={{ color: normalColor, fontWeight: "bold" }}>
+					<span>
 						{mcpServerUse.type === "use_mcp_tool"
 							? t("chat:mcp.wantsToUseTool", { serverName: mcpServerUse.serverName })
 							: t("chat:mcp.wantsToAccessResource", { serverName: mcpServerUse.serverName })}
@@ -228,20 +228,18 @@ export const ChatRowContent = ({
 					),
 					apiReqCancelReason !== null && apiReqCancelReason !== undefined ? (
 						apiReqCancelReason === "user_cancelled" ? (
-							<span style={{ color: normalColor, fontWeight: "bold" }}>
-								{t("chat:apiRequest.cancelled")}
-							</span>
+							<span>{t("chat:apiRequest.cancelled")}</span>
 						) : (
 							<span style={{ color: errorColor, fontWeight: "bold" }}>
 								{t("chat:apiRequest.streamingFailed")}
 							</span>
 						)
 					) : cost !== null && cost !== undefined ? (
-						<span style={{ color: normalColor, fontWeight: "bold" }}>{t("chat:apiRequest.title")}</span>
+						<span>{t("chat:apiRequest.title")}</span>
 					) : apiRequestFailedMessage ? (
 						<span style={{ color: errorColor, fontWeight: "bold" }}>{t("chat:apiRequest.failed")}</span>
 					) : (
-						<span style={{ color: normalColor, fontWeight: "bold" }}>{t("chat:apiRequest.streaming")}</span>
+						<span>{t("chat:apiRequest.streaming")}</span>
 					),
 				]
 			case "followup":
@@ -261,10 +259,9 @@ export const ChatRowContent = ({
 		display: "flex",
 		alignItems: "center",
 		gap: "10px",
-		marginBottom: "10px",
 		wordBreak: "break-word",
-		fontSize: "var(--text-lg)",
-		lineHeight: "1.6",
+		fontSize: "var(--text-md)",
+		lineHeight: "1.5",
 	}
 
 	const pStyle: React.CSSProperties = {
@@ -289,10 +286,13 @@ export const ChatRowContent = ({
 	}, [message.type, message.ask, message.partial, message.text])
 
 	if (tool) {
-		const toolIcon = (name: string) => (
+		const toolIcon = (name: string, color?: string) => (
 			<span
 				className={`codicon codicon-${name}`}
-				style={{ color: "var(--vscode-foreground)", marginBottom: "-1.5px" }}></span>
+				style={{
+					color: `${color ? color : "var(--vscode-gitDecoration-untrackedResourceForeground)"}`,
+					marginBottom: "-1.5px",
+				}}></span>
 		)
 
 		switch (tool.tool) {
@@ -304,9 +304,7 @@ export const ChatRowContent = ({
 						<>
 							<div style={headerStyle}>
 								{toolIcon("diff")}
-								<span style={{ fontWeight: "bold" }}>
-									{t("chat:fileOperations.wantsToApplyBatchChanges")}
-								</span>
+								<span>{t("chat:fileOperations.wantsToApplyBatchChanges")}</span>
 							</div>
 							<BatchDiffApproval files={tool.batchDiffs} ts={message.ts} />
 						</>
@@ -315,69 +313,76 @@ export const ChatRowContent = ({
 
 				// Regular single file diff
 				return (
-					<>
-						<div style={headerStyle}>
-							{tool.isProtected ? (
-								<span
-									className="codicon codicon-lock"
-									style={{ color: "var(--vscode-editorWarning-foreground)", marginBottom: "-1.5px" }}
-								/>
-							) : (
-								toolIcon(tool.tool === "appliedDiff" ? "diff" : "edit")
-							)}
-							<span style={{ fontWeight: "bold" }}>
-								{tool.isProtected
-									? t("chat:fileOperations.wantsToEditProtected")
-									: tool.isOutsideWorkspace
-										? t("chat:fileOperations.wantsToEditOutsideWorkspace")
-										: t("chat:fileOperations.wantsToEdit")}
-							</span>
-						</div>
-						<CodeAccordian
-							path={tool.path}
-							code={tool.content ?? tool.diff}
-							language="diff"
-							progressStatus={message.progressStatus}
-							isLoading={message.partial}
-							isExpanded={isExpanded}
-							onToggleExpand={handleToggleExpand}
-						/>
-					</>
+					<CodeAccordian
+						header={
+							<div style={headerStyle}>
+								{tool.isProtected ? (
+									<span
+										className="codicon codicon-lock"
+										style={{
+											color: "var(--vscode-editorWarning-foreground)",
+											marginBottom: "-1.5px",
+										}}
+									/>
+								) : (
+									toolIcon(tool.tool === "appliedDiff" ? "diff" : "edit")
+								)}
+								<span>
+									{tool.isProtected
+										? t("chat:fileOperations.wantsToEditProtected")
+										: tool.isOutsideWorkspace
+											? t("chat:fileOperations.wantsToEditOutsideWorkspace")
+											: t("chat:fileOperations.wantsToEdit")}{" "}
+									{tool.path}
+								</span>
+							</div>
+						}
+						path={tool.path}
+						code={tool.content ?? tool.diff}
+						language="diff"
+						progressStatus={message.progressStatus}
+						isLoading={message.partial}
+						isExpanded={isExpanded}
+						onToggleExpand={handleToggleExpand}
+					/>
 				)
 			case "insertContent":
 				return (
-					<>
-						<div style={headerStyle}>
-							{tool.isProtected ? (
-								<span
-									className="codicon codicon-lock"
-									style={{ color: "var(--vscode-editorWarning-foreground)", marginBottom: "-1.5px" }}
-								/>
-							) : (
-								toolIcon("insert")
-							)}
-							<span style={{ fontWeight: "bold" }}>
-								{tool.isProtected
-									? t("chat:fileOperations.wantsToEditProtected")
-									: tool.isOutsideWorkspace
-										? t("chat:fileOperations.wantsToEditOutsideWorkspace")
-										: tool.lineNumber === 0
-											? t("chat:fileOperations.wantsToInsertAtEnd")
-											: t("chat:fileOperations.wantsToInsertWithLineNumber", {
-													lineNumber: tool.lineNumber,
-												})}
-							</span>
-						</div>
-						<CodeAccordian
-							path={tool.path}
-							code={tool.diff}
-							language="diff"
-							progressStatus={message.progressStatus}
-							isLoading={message.partial}
-							isExpanded={isExpanded}
-							onToggleExpand={handleToggleExpand}
-						/>
-					</>
+					<CodeAccordian
+						header={
+							<div style={headerStyle}>
+								{tool.isProtected ? (
+									<span
+										className="codicon codicon-lock"
+										style={{
+											color: "var(--vscode-editorWarning-foreground)",
+											marginBottom: "-1.5px",
+										}}
+									/>
+								) : (
+									toolIcon("insert")
+								)}
+								<span>
+									{tool.isProtected
+										? t("chat:fileOperations.wantsToEditProtected")
+										: tool.isOutsideWorkspace
+											? t("chat:fileOperations.wantsToEditOutsideWorkspace")
+											: tool.lineNumber === 0
+												? t("chat:fileOperations.wantsToInsertAtEnd")
+												: t("chat:fileOperations.wantsToInsertWithLineNumber", {
+														lineNumber: tool.lineNumber,
+													})}{" "}
+									{tool.path}
+								</span>
+							</div>
+						}
+						code={tool.diff}
+						language="diff"
+						progressStatus={message.progressStatus}
+						isLoading={message.partial}
+						isExpanded={isExpanded}
+						onToggleExpand={handleToggleExpand}
+					/>
 				)
 			case "searchAndReplace":
 				return (
@@ -391,7 +396,7 @@ export const ChatRowContent = ({
 							) : (
 								toolIcon("replace")
 							)}
-							<span style={{ fontWeight: "bold" }}>
+							<span>
 								{tool.isProtected && message.type === "ask"
 									? t("chat:fileOperations.wantsToEditProtected")
 									: message.type === "ask"
@@ -414,7 +419,7 @@ export const ChatRowContent = ({
 				return (
 					<div style={headerStyle}>
 						{toolIcon("search")}
-						<span style={{ fontWeight: "bold" }}>
+						<span>
 							{tool.path ? (
 								<Trans
 									i18nKey="chat:codebaseSearch.wantsToSearchWithPath"
@@ -434,31 +439,34 @@ export const ChatRowContent = ({
 			}
 			case "newFileCreated":
 				return (
-					<>
-						<div style={headerStyle}>
-							{tool.isProtected ? (
-								<span
-									className="codicon codicon-lock"
-									style={{ color: "var(--vscode-editorWarning-foreground)", marginBottom: "-1.5px" }}
-								/>
-							) : (
-								toolIcon("new-file")
-							)}
-							<span style={{ fontWeight: "bold" }}>
-								{tool.isProtected
-									? t("chat:fileOperations.wantsToEditProtected")
-									: t("chat:fileOperations.wantsToCreate")}
-							</span>
-						</div>
-						<CodeAccordian
-							path={tool.path}
-							code={tool.content}
-							language={getLanguageFromPath(tool.path || "") || "log"}
-							isLoading={message.partial}
-							isExpanded={isExpanded}
-							onToggleExpand={handleToggleExpand}
-						/>
-					</>
+					<CodeAccordian
+						header={
+							<div style={headerStyle}>
+								{tool.isProtected ? (
+									<span
+										className="codicon codicon-lock"
+										style={{
+											color: "var(--vscode-editorWarning-foreground)",
+											marginBottom: "-1.5px",
+										}}
+									/>
+								) : (
+									toolIcon("new-file")
+								)}
+								<span>
+									{tool.isProtected
+										? t("chat:fileOperations.wantsToEditProtected")
+										: t("chat:fileOperations.wantsToCreate")}{" "}
+									{tool.path}
+								</span>
+							</div>
+						}
+						code={tool.content}
+						language={getLanguageFromPath(tool.path || "") || "log"}
+						isLoading={message.partial}
+						isExpanded={isExpanded}
+						onToggleExpand={handleToggleExpand}
+					/>
 				)
 			case "readFile":
 				// Check if this is a batch file permission request
@@ -469,9 +477,7 @@ export const ChatRowContent = ({
 						<>
 							<div style={headerStyle}>
 								{toolIcon("files")}
-								<span style={{ fontWeight: "bold" }}>
-									{t("chat:fileOperations.wantsToReadMultiple")}
-								</span>
+								<span>{t("chat:fileOperations.wantsToReadMultiple")}</span>
 							</div>
 							<BatchFilePermission
 								files={tool.batchFiles || []}
@@ -486,10 +492,13 @@ export const ChatRowContent = ({
 
 				// Regular single file read request
 				return (
-					<>
-						<div style={headerStyle}>
-							{toolIcon("file-code")}
-							<span style={{ fontWeight: "bold" }}>
+					<ToolUseBlock>
+						<ToolUseBlockHeader
+							onClick={() => vscode.postMessage({ type: "openFile", text: tool.content })}>
+							{tool.path?.startsWith(".") && <span>.</span>}
+							{toolIcon("code")}
+							<div style={{ flexGrow: 0.05 }}></div>
+							<span>
 								{message.type === "ask"
 									? tool.isOutsideWorkspace
 										? t("chat:fileOperations.wantsToReadOutsideWorkspace")
@@ -500,94 +509,91 @@ export const ChatRowContent = ({
 											: t("chat:fileOperations.wantsToRead")
 									: t("chat:fileOperations.didRead")}
 							</span>
-						</div>
-						<ToolUseBlock>
-							<ToolUseBlockHeader
-								onClick={() => vscode.postMessage({ type: "openFile", text: tool.content })}>
-								{tool.path?.startsWith(".") && <span>.</span>}
-								<span className="whitespace-nowrap overflow-hidden text-ellipsis text-left mr-2 rtl">
-									{removeLeadingNonAlphanumeric(tool.path ?? "") + "\u200E"}
-									{tool.reason}
-								</span>
-								<div style={{ flexGrow: 1 }}></div>
-								<span
-									className={`codicon codicon-link-external`}
-									style={{ fontSize: 13.5, margin: "1px 0" }}
-								/>
-							</ToolUseBlockHeader>
-						</ToolUseBlock>
-					</>
+							<div style={{ flexGrow: 0.05 }}></div>
+							<span className="whitespace-nowrap overflow-hidden text-ellipsis text-left mr-2 rtl">
+								{removeLeadingNonAlphanumeric(tool.path ?? "") + "\u200E"}
+								{tool.reason}
+							</span>
+							<div style={{ flexGrow: 1 }}></div>
+							<span
+								className={`codicon codicon-link-external`}
+								style={{ fontSize: 13.5, margin: "1px 0" }}
+							/>
+						</ToolUseBlockHeader>
+					</ToolUseBlock>
 				)
 			case "fetchInstructions":
 				return (
-					<>
-						<div style={headerStyle}>
-							{toolIcon("file-code")}
-							<span style={{ fontWeight: "bold" }}>{t("chat:instructions.wantsToFetch")}</span>
-						</div>
-						<CodeAccordian
-							code={tool.content}
-							language="markdown"
-							isLoading={message.partial}
-							isExpanded={isExpanded}
-							onToggleExpand={handleToggleExpand}
-						/>
-					</>
+					<CodeAccordian
+						header={
+							<div style={headerStyle}>
+								{toolIcon("file-code")}
+								<span>{t("chat:instructions.wantsToFetch")}</span>
+								{tool.content}
+							</div>
+						}
+						language="markdown"
+						isLoading={message.partial}
+						isExpanded={isExpanded}
+						onToggleExpand={handleToggleExpand}
+					/>
 				)
 			case "listFilesTopLevel":
 				return (
-					<>
-						<div style={headerStyle}>
-							{toolIcon("folder-opened")}
-							<span style={{ fontWeight: "bold" }}>
-								{message.type === "ask"
-									? tool.isOutsideWorkspace
-										? t("chat:directoryOperations.wantsToViewTopLevelOutsideWorkspace")
-										: t("chat:directoryOperations.wantsToViewTopLevel")
-									: tool.isOutsideWorkspace
-										? t("chat:directoryOperations.didViewTopLevelOutsideWorkspace")
-										: t("chat:directoryOperations.didViewTopLevel")}
-							</span>
-						</div>
-						<CodeAccordian
-							path={tool.path}
-							code={tool.content}
-							language="shell-session"
-							isExpanded={isExpanded}
-							onToggleExpand={handleToggleExpand}
-						/>
-					</>
+					<CodeAccordian
+						header={
+							<div style={headerStyle}>
+								{toolIcon("folder-opened")}
+								<span>
+									{message.type === "ask"
+										? tool.isOutsideWorkspace
+											? t("chat:directoryOperations.wantsToViewTopLevelOutsideWorkspace")
+											: t("chat:directoryOperations.wantsToViewTopLevel")
+										: tool.isOutsideWorkspace
+											? t("chat:directoryOperations.didViewTopLevelOutsideWorkspace")
+											: t("chat:directoryOperations.didViewTopLevel")}{" "}
+									{tool.path}
+									{"/"}
+								</span>
+							</div>
+						}
+						code={tool.content}
+						language="shell-session"
+						isExpanded={isExpanded}
+						onToggleExpand={handleToggleExpand}
+					/>
 				)
 			case "listFilesRecursive":
 				return (
-					<>
-						<div style={headerStyle}>
-							{toolIcon("folder-opened")}
-							<span style={{ fontWeight: "bold" }}>
-								{message.type === "ask"
-									? tool.isOutsideWorkspace
-										? t("chat:directoryOperations.wantsToViewRecursiveOutsideWorkspace")
-										: t("chat:directoryOperations.wantsToViewRecursive")
-									: tool.isOutsideWorkspace
-										? t("chat:directoryOperations.didViewRecursiveOutsideWorkspace")
-										: t("chat:directoryOperations.didViewRecursive")}
-							</span>
-						</div>
-						<CodeAccordian
-							path={tool.path}
-							code={tool.content}
-							language="shellsession"
-							isExpanded={isExpanded}
-							onToggleExpand={handleToggleExpand}
-						/>
-					</>
+					<CodeAccordian
+						header={
+							<div style={headerStyle}>
+								{toolIcon("folder-opened")}
+								<span>
+									{message.type === "ask"
+										? tool.isOutsideWorkspace
+											? t("chat:directoryOperations.wantsToViewRecursiveOutsideWorkspace")
+											: t("chat:directoryOperations.wantsToViewRecursive")
+										: tool.isOutsideWorkspace
+											? t("chat:directoryOperations.didViewRecursiveOutsideWorkspace")
+											: t("chat:directoryOperations.didViewRecursive")}{" "}
+									{tool.path}
+									{"/"}
+								</span>
+							</div>
+						}
+						code={tool.content}
+						language="shellsession"
+						isExpanded={isExpanded}
+						onToggleExpand={handleToggleExpand}
+					/>
 				)
 			case "listCodeDefinitionNames":
 				return (
 					<>
 						<div style={headerStyle}>
 							{toolIcon("file-code")}
-							<span style={{ fontWeight: "bold" }}>
+							<span>
 								{message.type === "ask"
 									? tool.isOutsideWorkspace
 										? t("chat:directoryOperations.wantsToViewDefinitionsOutsideWorkspace")
@@ -611,7 +617,7 @@ export const ChatRowContent = ({
 					<>
 						<div style={headerStyle}>
 							{toolIcon("search")}
-							<span style={{ fontWeight: "bold" }}>
+							<span>
 								{message.type === "ask" ? (
 									<Trans
 										i18nKey={
@@ -649,7 +655,7 @@ export const ChatRowContent = ({
 					<>
 						<div style={headerStyle}>
 							{toolIcon("symbol-enum")}
-							<span style={{ fontWeight: "bold" }}>
+							<span>
 								{message.type === "ask" ? (
 									<>
 										{tool.reason ? (
@@ -692,7 +698,7 @@ export const ChatRowContent = ({
 					<>
 						<div style={headerStyle}>
 							{toolIcon("tasklist")}
-							<span style={{ fontWeight: "bold" }}>
+							<span>
 								<Trans
 									i18nKey="chat:subtasks.wantsToCreate"
 									components={{ code: <code>{tool.mode}</code> }}
@@ -736,7 +742,7 @@ export const ChatRowContent = ({
 					<>
 						<div style={headerStyle}>
 							{toolIcon("check-all")}
-							<span style={{ fontWeight: "bold" }}>{t("chat:subtasks.wantsToFinish")}</span>
+							<span>{t("chat:subtasks.wantsToFinish")}</span>
 						</div>
 						<div
 							style={{
@@ -816,7 +822,7 @@ export const ChatRowContent = ({
 												fontSize: 16,
 												marginBottom: "-1.5px",
 											}}></span>
-										<span style={{ fontWeight: "bold" }}>{t("chat:diffError.title")}</span>
+										<span>{t("chat:diffError.title")}</span>
 									</div>
 									<div style={{ display: "flex", alignItems: "center" }}>
 										<VSCodeButton
@@ -933,7 +939,14 @@ export const ChatRowContent = ({
 									msUserSelect: "none",
 								}}
 								onClick={handleToggleExpand}>
-								<div style={{ display: "flex", alignItems: "center", gap: "10px", flexGrow: 1 }}>
+								<div
+									style={{
+										display: "flex",
+										alignItems: "center",
+										gap: "10px",
+										flexGrow: 1,
+										fontSize: "var(--text-sm)",
+									}}>
 									{icon}
 									{title}
 									<VSCodeBadge
@@ -999,7 +1012,6 @@ export const ChatRowContent = ({
 									<div
 										className="flex-grow px-2 py-1 wrap-anywhere"
 										style={{
-											color: "var(--vscode-list-activeSelectionForeground)",
 											fontSize: "var(--text-lx)",
 											lineHeight: "1.6",
 										}}>
@@ -1062,7 +1074,6 @@ export const ChatRowContent = ({
 								style={{
 									backgroundColor:
 										"color-mix(in srgb, var(--vscode-button-background) 10%, transparent)",
-									color: "var(--vscode-list-activeSelectionForeground)",
 									paddingTop: 10,
 									padding: "10px",
 									borderRadius: "6px",
