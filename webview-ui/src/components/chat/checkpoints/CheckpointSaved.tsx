@@ -35,11 +35,9 @@ export const CheckpointSaved = ({ checkpoint, ...props }: CheckpointSavedProps) 
 
 	return (
 		<div className="flex items-center justify-between">
-			<div className="flex gap-2">
+			<div className="flex gap-2" style={{ fontSize: "var(--text-sm)" }}>
 				<span className="codicon codicon-git-commit text-blue-400" />
-				<span className="font-bold">
-					{metadata.isFirst ? t("chat:checkpoint.initial") : t("chat:checkpoint.regular")}
-				</span>
+				{metadata.isFirst ? t("chat:checkpoint.initial") : t("chat:checkpoint.regular")}
 				{isCurrent && <span className="text-muted text-sm">{t("chat:checkpoint.current")}</span>}
 			</div>
 			<CheckpointMenu {...props} checkpoint={metadata} />
