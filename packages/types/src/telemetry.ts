@@ -25,6 +25,7 @@ export enum TelemetryEventName {
 	TASK_CONVERSATION_MESSAGE = "Conversation Message",
 	LLM_COMPLETION = "LLM Completion",
 	MODE_SWITCH = "Mode Switched",
+	MODE_SELECTOR_OPENED = "Mode Selector Opened",
 	TOOL_USED = "Tool Used",
 
 	CHECKPOINT_CREATED = "Checkpoint Created",
@@ -101,12 +102,7 @@ export const telemetryPropertiesSchema = z.object({
 	...gitPropertiesSchema.shape,
 })
 
-export const cloudTelemetryPropertiesSchema = z.object({
-	...telemetryPropertiesSchema.shape,
-})
-
 export type TelemetryProperties = z.infer<typeof telemetryPropertiesSchema>
-export type CloudTelemetryProperties = z.infer<typeof cloudTelemetryPropertiesSchema>
 export type GitProperties = z.infer<typeof gitPropertiesSchema>
 
 /**
@@ -131,6 +127,7 @@ export const rooCodeTelemetryEventSchema = z.discriminatedUnion("type", [
 			TelemetryEventName.TASK_COMPLETED,
 			TelemetryEventName.TASK_CONVERSATION_MESSAGE,
 			TelemetryEventName.MODE_SWITCH,
+			TelemetryEventName.MODE_SELECTOR_OPENED,
 			TelemetryEventName.TOOL_USED,
 			TelemetryEventName.CHECKPOINT_CREATED,
 			TelemetryEventName.CHECKPOINT_RESTORED,
@@ -161,12 +158,12 @@ export const rooCodeTelemetryEventSchema = z.discriminatedUnion("type", [
 			TelemetryEventName.MODE_SETTINGS_CHANGED,
 			TelemetryEventName.CUSTOM_MODE_CREATED,
 		]),
-		properties: cloudTelemetryPropertiesSchema,
+		properties: telemetryPropertiesSchema,
 	}),
 	z.object({
 		type: z.literal(TelemetryEventName.TASK_MESSAGE),
 		properties: z.object({
-			...cloudTelemetryPropertiesSchema.shape,
+			...telemetryPropertiesSchema.shape,
 			taskId: z.string(),
 			message: clineMessageSchema,
 		}),
@@ -174,7 +171,7 @@ export const rooCodeTelemetryEventSchema = z.discriminatedUnion("type", [
 	z.object({
 		type: z.literal(TelemetryEventName.LLM_COMPLETION),
 		properties: z.object({
-			...cloudTelemetryPropertiesSchema.shape,
+			...telemetryPropertiesSchema.shape,
 			inputTokens: z.number(),
 			outputTokens: z.number(),
 			cacheReadTokens: z.number().optional(),
@@ -200,7 +197,6 @@ export type TelemetryEventSubscription =
 
 export interface TelemetryPropertiesProvider {
 	getTelemetryProperties(): Promise<TelemetryProperties>
-	getCloudTelemetryProperties?(): Promise<CloudTelemetryProperties>
 }
 
 /**

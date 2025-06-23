@@ -1,3 +1,4 @@
+import { safeWriteJson } from "../../utils/safeWriteJson"
 import * as path from "path"
 import fs from "fs/promises"
 import pWaitFor from "p-wait-for"
@@ -27,7 +28,7 @@ import { fileExistsAtPath } from "../../utils/fs"
 import { playTts, setTtsEnabled, setTtsSpeed, stopTts } from "../../utils/tts"
 import { singleCompletionHandler } from "../../utils/single-completion-handler"
 import { searchCommits } from "../../utils/git"
-import { exportSettings, importSettings } from "../config/importExport"
+import { exportSettings, importSettingsWithFeedback } from "../config/importExport"
 import { getOpenAiModels } from "../../api/providers/openai"
 import { getVsCodeLmModels } from "../../api/providers/vscode-lm"
 import { openMention } from "../mentions"
@@ -324,19 +325,12 @@ export const webviewMessageHandler = async (
 			provider.exportTaskWithId(message.text!)
 			break
 		case "importSettings": {
-			const result = await importSettings({
+			await importSettingsWithFeedback({
 				providerSettingsManager: provider.providerSettingsManager,
 				contextProxy: provider.contextProxy,
 				customModesManager: provider.customModesManager,
+				provider: provider,
 			})
-
-			if (result.success) {
-				provider.settingsImportedAt = Date.now()
-				await provider.postStateToWebview()
-				await vscode.window.showInformationMessage(t("common:info.settings_imported"))
-			} else if (result.error) {
-				await vscode.window.showErrorMessage(t("common:errors.settings_import_failed", { error: result.error }))
-			}
 
 			break
 		}
@@ -566,15 +560,22 @@ export const webviewMessageHandler = async (
 		case "cancelTask":
 			await provider.cancelTask()
 			break
-		case "allowedCommands":
-			await provider.context.globalState.update("allowedCommands", message.commands)
+		case "allowedCommands": {
+			// Validate and sanitize the commands array
+			const commands = message.commands ?? []
+			const validCommands = Array.isArray(commands)
+				? commands.filter((cmd) => typeof cmd === "string" && cmd.trim().length > 0)
+				: []
+
+			await updateGlobalState("allowedCommands", validCommands)
 
 			// Also update workspace settings.
 			await vscode.workspace
 				.getConfiguration(Package.name)
-				.update("allowedCommands", message.commands, vscode.ConfigurationTarget.Global)
+				.update("allowedCommands", validCommands, vscode.ConfigurationTarget.Global)
 
 			break
+		}
 		case "openCustomModesSettings": {
 			const customModesFilePath = await provider.customModesManager.getCustomModesFilePath()
 
@@ -608,7 +609,7 @@ export const webviewMessageHandler = async (
 				const exists = await fileExistsAtPath(mcpPath)
 
 				if (!exists) {
-					await fs.writeFile(mcpPath, JSON.stringify({ mcpServers: {} }, null, 2))
+					await safeWriteJson(mcpPath, { mcpServers: {} })
 				}
 
 				await openFile(mcpPath)

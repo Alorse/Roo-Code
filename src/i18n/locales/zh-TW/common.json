@@ -122,11 +122,33 @@
 			}
 		}
 	},
+	"customModes": {
+		"errors": {
+			"yamlParseError": ".roomodes 檔案第 {{line}} 行 YAML 格式無效。請檢查：\n• 正確的縮排（使用空格，不要使用定位字元）\n• 匹配的引號和括號\n• 有效的 YAML 語法",
+			"schemaValidationError": ".roomodes 中自訂模式格式無效：\n{{issues}}",
+			"invalidFormat": "自訂模式格式無效。請確保你的設定遵循正確的 YAML 格式。",
+			"updateFailed": "更新自訂模式失敗：{{error}}",
+			"deleteFailed": "刪除自訂模式失敗：{{error}}",
+			"resetFailed": "重設自訂模式失敗：{{error}}",
+			"modeNotFound": "寫入錯誤：未找到模式",
+			"noWorkspaceForProject": "未找到專案特定模式的工作區資料夾"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "您的組織需要 Roo Code Cloud 身份驗證。請登入以繼續。",
 			"organization_mismatch": "您必須使用組織的 Roo Code Cloud 帳戶進行身份驗證。",
 			"verification_failed": "無法驗證組織身份驗證。"
+		},
+		"geminiCli": {
+			"oauthLoadFailed": "載入 OAuth 憑證失敗。請先進行身份驗證：{{error}}",
+			"tokenRefreshFailed": "重新整理 OAuth Token 失敗：{{error}}",
+			"onboardingTimeout": "入門操作在 60 秒後逾時。請稍後重試。",
+			"projectDiscoveryFailed": "無法發現專案 ID。請確保已使用 'gemini auth' 進行身份驗證。",
+			"rateLimitExceeded": "速率限制已超出。免費層級限制已達到。",
+			"badRequest": "請求錯誤：{{details}}",
+			"apiError": "Gemini CLI API 錯誤：{{error}}",
+			"completionError": "Gemini CLI 完成錯誤：{{error}}"
 		}
 	}
 }

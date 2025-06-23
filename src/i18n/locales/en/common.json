@@ -112,11 +112,33 @@
 		"task_prompt": "What should Roo do?",
 		"task_placeholder": "Type your task here"
 	},
+	"customModes": {
+		"errors": {
+			"yamlParseError": "Invalid YAML in .roomodes file at line {{line}}. Please check for:\n• Proper indentation (use spaces, not tabs)\n• Matching quotes and brackets\n• Valid YAML syntax",
+			"schemaValidationError": "Invalid custom modes format in .roomodes:\n{{issues}}",
+			"invalidFormat": "Invalid custom modes format. Please ensure your settings follow the correct YAML format.",
+			"updateFailed": "Failed to update custom mode: {{error}}",
+			"deleteFailed": "Failed to delete custom mode: {{error}}",
+			"resetFailed": "Failed to reset custom modes: {{error}}",
+			"modeNotFound": "Write error: Mode not found",
+			"noWorkspaceForProject": "No workspace folder found for project-specific mode"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "Your organization requires Roo Code Cloud authentication. Please sign in to continue.",
 			"organization_mismatch": "You must be authenticated with your organization's Roo Code Cloud account.",
 			"verification_failed": "Unable to verify organization authentication."
+		},
+		"geminiCli": {
+			"oauthLoadFailed": "Failed to load OAuth credentials. Please authenticate first: {{error}}",
+			"tokenRefreshFailed": "Failed to refresh OAuth token: {{error}}",
+			"onboardingTimeout": "Onboarding operation timed out after 60 seconds. Please try again later.",
+			"projectDiscoveryFailed": "Could not discover project ID. Make sure you're authenticated with 'gemini auth'.",
+			"rateLimitExceeded": "Rate limit exceeded. Free tier limits have been reached.",
+			"badRequest": "Bad request: {{details}}",
+			"apiError": "Gemini CLI API error: {{error}}",
+			"completionError": "Gemini CLI completion error: {{error}}"
 		}
 	}
 }
