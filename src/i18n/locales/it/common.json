@@ -120,6 +120,7 @@
 				"description": "Percorso opzionale alla tua CLI Claude Code. Predefinito 'claude' se non impostato.",
 				"placeholder": "Predefinito: claude"
 			}
+<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -132,6 +133,8 @@
 			"resetFailed": "Reset modalità personalizzate fallito: {{error}}",
 			"modeNotFound": "Errore di scrittura: Modalità non trovata",
 			"noWorkspaceForProject": "Nessuna cartella workspace trovata per la modalità specifica del progetto"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"mdm": {

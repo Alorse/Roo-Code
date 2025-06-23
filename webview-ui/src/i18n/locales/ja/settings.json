@@ -308,6 +308,7 @@
 			"pathLabel": "クロードコードパス",
 			"description": "Claude Code CLIへのオプションパス。設定されていない場合、デフォルトは「claude」です。",
 			"placeholder": "デフォルト：claude"
+<<<<<<< HEAD
 		},
 		"geminiCli": {
 			"description": "このプロバイダーはGemini CLIツールからのOAuth認証を使用し、APIキーは必要ありません。",
@@ -323,6 +324,8 @@
 			"requirement4": "APIキーは使用しません - 認証はOAuthで処理されます",
 			"requirement5": "Gemini CLIツールが最初にインストールされ、認証されている必要があります",
 			"freeAccess": "OAuth認証による無料アクセス"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"browser": {

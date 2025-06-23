@@ -1,4 +1,5 @@
 import * as vscode from "vscode"
+<<<<<<< HEAD
 import type Anthropic from "@anthropic-ai/sdk"
 import { execa } from "execa"
 import { ClaudeCodeMessage } from "./types"
@@ -7,10 +8,22 @@ import readline from "readline"
 const cwd = vscode.workspace.workspaceFolders?.map((folder) => folder.uri.fsPath).at(0)
 
 type ClaudeCodeOptions = {
+=======
+import Anthropic from "@anthropic-ai/sdk"
+import { execa } from "execa"
+
+export function runClaudeCode({
+	systemPrompt,
+	messages,
+	path,
+	modelId,
+}: {
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 	systemPrompt: string
 	messages: Anthropic.Messages.MessageParam[]
 	path?: string
 	modelId?: string
+<<<<<<< HEAD
 }
 
 type ProcessState = {
@@ -110,6 +123,12 @@ const CLAUDE_CODE_TIMEOUT = 600000 // 10 minutes
 function runProcess({ systemPrompt, messages, path, modelId }: ClaudeCodeOptions) {
 	const claudePath = path || "claude"
 
+=======
+}) {
+	const claudePath = path || "claude"
+
+	// TODO: Is it worth using sessions? Where do we store the session ID?
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 	const args = [
 		"-p",
 		JSON.stringify(messages),
@@ -118,9 +137,13 @@ function runProcess({ systemPrompt, messages, path, modelId }: ClaudeCodeOptions
 		"--verbose",
 		"--output-format",
 		"stream-json",
+<<<<<<< HEAD
 		"--disallowedTools",
 		claudeCodeTools,
 		// Roo Code will handle recursive calls
+=======
+		// Cline will handle recursive calls
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		"--max-turns",
 		"1",
 	]
@@ -129,10 +152,15 @@ function runProcess({ systemPrompt, messages, path, modelId }: ClaudeCodeOptions
 		args.push("--model", modelId)
 	}
 
+<<<<<<< HEAD
+=======
+	const cwd = vscode.workspace.workspaceFolders?.map((folder) => folder.uri.fsPath).at(0)
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 	return execa(claudePath, args, {
 		stdin: "ignore",
 		stdout: "pipe",
 		stderr: "pipe",
+<<<<<<< HEAD
 		env: {
 			...process.env,
 			// The default is 32000. However, I've gotten larger responses, so we increase it unless the user specified it.
@@ -175,3 +203,9 @@ function attemptParseChunk(data: string): ClaudeCodeMessage | null {
 		return null
 	}
 }
+=======
+		env: process.env,
+		cwd,
+	})
+}
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))

@@ -308,6 +308,7 @@
 			"pathLabel": "Ścieżka Claude Code",
 			"description": "Opcjonalna ścieżka do Twojego CLI Claude Code. Domyślnie 'claude', jeśli nie ustawiono.",
 			"placeholder": "Domyślnie: claude"
+<<<<<<< HEAD
 		},
 		"geminiCli": {
 			"description": "Ten dostawca używa uwierzytelniania OAuth z narzędzia Gemini CLI i nie wymaga kluczy API.",
@@ -323,6 +324,8 @@
 			"requirement4": "Nie używa kluczy API - uwierzytelnianie jest obsługiwane przez OAuth",
 			"requirement5": "Wymaga, aby narzędzie Gemini CLI było najpierw zainstalowane i uwierzytelnione",
 			"freeAccess": "Darmowy dostęp przez uwierzytelnianie OAuth"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"browser": {

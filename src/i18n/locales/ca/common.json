@@ -120,6 +120,7 @@
 				"description": "Ruta opcional a la teva CLI de Claude Code. Per defecte 'claude' si no s'estableix.",
 				"placeholder": "Per defecte: claude"
 			}
+<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -132,6 +133,8 @@
 			"resetFailed": "Error en restablir els modes personalitzats: {{error}}",
 			"modeNotFound": "Error d'escriptura: Mode no trobat",
 			"noWorkspaceForProject": "No s'ha trobat cap carpeta d'espai de treball per al mode específic del projecte"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"mdm": {

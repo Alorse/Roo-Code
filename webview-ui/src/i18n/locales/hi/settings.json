@@ -308,6 +308,7 @@
 			"pathLabel": "क्लाउड कोड पथ",
 			"description": "आपके क्लाउड कोड सीएलआई का वैकल्पिक पथ। यदि सेट नहीं है तो डिफ़ॉल्ट 'claude' है।",
 			"placeholder": "डिफ़ॉल्ट: claude"
+<<<<<<< HEAD
 		},
 		"geminiCli": {
 			"description": "यह प्रदाता Gemini CLI टूल से OAuth प्रमाणीकरण का उपयोग करता है और API कुंजियों की आवश्यकता नहीं है।",
@@ -323,6 +324,8 @@
 			"requirement4": "API कुंजियों का उपयोग नहीं करता - प्रमाणीकरण OAuth के माध्यम से संभाला जाता है",
 			"requirement5": "Gemini CLI टूल को पहले इंस्टॉल और प्रमाणित करने की आवश्यकता है",
 			"freeAccess": "OAuth प्रमाणीकरण के माध्यम से मुफ्त पहुंच"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"browser": {

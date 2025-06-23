@@ -312,6 +312,7 @@
 			"pathLabel": "Jalur Kode Claude",
 			"description": "Jalur opsional ke Claude Code CLI Anda. Defaultnya adalah 'claude' jika tidak diatur.",
 			"placeholder": "Default: claude"
+<<<<<<< HEAD
 		},
 		"geminiCli": {
 			"description": "Penyedia ini menggunakan autentikasi OAuth dari alat Gemini CLI dan tidak memerlukan kunci API.",
@@ -327,6 +328,8 @@
 			"requirement4": "Tidak menggunakan kunci API - autentikasi ditangani melalui OAuth",
 			"requirement5": "Memerlukan alat Gemini CLI diinstal dan diautentikasi terlebih dahulu",
 			"freeAccess": "Akses gratis melalui autentikasi OAuth"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"browser": {

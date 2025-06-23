@@ -122,6 +122,7 @@
 			}
 		}
 	},
+<<<<<<< HEAD
 	"customModes": {
 		"errors": {
 			"yamlParseError": "YAML tidak valid dalam file .roomodes pada baris {{line}}. Silakan periksa:\n• Indentasi yang benar (gunakan spasi, bukan tab)\n• Tanda kutip dan kurung yang cocok\n• Sintaks YAML yang valid",
@@ -134,6 +135,8 @@
 			"noWorkspaceForProject": "Tidak ditemukan folder workspace untuk mode khusus proyek"
 		}
 	},
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "Organisasi kamu memerlukan autentikasi Roo Code Cloud. Silakan masuk untuk melanjutkan.",

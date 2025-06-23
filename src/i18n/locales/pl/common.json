@@ -120,6 +120,7 @@
 				"description": "Opcjonalna ścieżka do Twojego CLI Claude Code. Domyślnie 'claude', jeśli nie ustawiono.",
 				"placeholder": "Domyślnie: claude"
 			}
+<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -132,6 +133,8 @@
 			"resetFailed": "Resetowanie trybów niestandardowych nie powiodło się: {{error}}",
 			"modeNotFound": "Błąd zapisu: Tryb nie został znaleziony",
 			"noWorkspaceForProject": "Nie znaleziono folderu obszaru roboczego dla trybu specyficznego dla projektu"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"mdm": {

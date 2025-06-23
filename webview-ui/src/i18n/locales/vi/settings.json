@@ -308,6 +308,7 @@
 			"pathLabel": "Đường dẫn Claude Code",
 			"description": "Đường dẫn tùy chọn đến Claude Code CLI của bạn. Mặc định là 'claude' nếu không được đặt.",
 			"placeholder": "Mặc định: claude"
+<<<<<<< HEAD
 		},
 		"geminiCli": {
 			"description": "Nhà cung cấp này sử dụng xác thực OAuth từ công cụ Gemini CLI và không yêu cầu khóa API.",
@@ -323,6 +324,8 @@
 			"requirement4": "Không sử dụng khóa API - xác thực được xử lý qua OAuth",
 			"requirement5": "Yêu cầu công cụ Gemini CLI được cài đặt và xác thực trước",
 			"freeAccess": "Truy cập miễn phí qua xác thực OAuth"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"browser": {

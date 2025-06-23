@@ -308,6 +308,7 @@
 			"pathLabel": "Claude Code Pad",
 			"description": "Optioneel pad naar uw Claude Code CLI. Standaard 'claude' als niet ingesteld.",
 			"placeholder": "Standaard: claude"
+<<<<<<< HEAD
 		},
 		"geminiCli": {
 			"description": "Deze provider gebruikt OAuth-authenticatie van de Gemini CLI-tool en vereist geen API-sleutels.",
@@ -323,6 +324,8 @@
 			"requirement4": "Gebruikt geen API-sleutels - authenticatie wordt afgehandeld via OAuth",
 			"requirement5": "Vereist dat de Gemini CLI-tool eerst wordt geïnstalleerd en geauthenticeerd",
 			"freeAccess": "Gratis toegang via OAuth-authenticatie"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"browser": {

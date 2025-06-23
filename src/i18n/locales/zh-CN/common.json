@@ -125,6 +125,7 @@
 				"description": "Claude Code CLI 的可选路径。如果未设置，默认为 'claude'。",
 				"placeholder": "默认: claude"
 			}
+<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -137,6 +138,8 @@
 			"resetFailed": "重置自定义模式失败：{{error}}",
 			"modeNotFound": "写入错误：未找到模式",
 			"noWorkspaceForProject": "未找到项目特定模式的工作区文件夹"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"mdm": {

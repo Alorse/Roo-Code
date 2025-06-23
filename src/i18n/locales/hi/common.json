@@ -120,6 +120,7 @@
 				"description": "आपके क्लाउड कोड CLI का वैकल्पिक पाथ। सेट न होने पर डिफ़ॉल्ट रूप से 'claude'。",
 				"placeholder": "डिफ़ॉल्ट: claude"
 			}
+<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -132,6 +133,8 @@
 			"resetFailed": "कस्टम मोड रीसेट विफल: {{error}}",
 			"modeNotFound": "लेखन त्रुटि: मोड नहीं मिला",
 			"noWorkspaceForProject": "प्रोजेक्ट-विशिष्ट मोड के लिए वर्कस्पेस फ़ोल्डर नहीं मिला"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"mdm": {

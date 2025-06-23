@@ -120,6 +120,7 @@
 				"description": "Optionaler Pfad zu deiner Claude Code CLI. Standardmäßig 'claude', falls nicht festgelegt.",
 				"placeholder": "Standard: claude"
 			}
+<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -132,6 +133,8 @@
 			"resetFailed": "Fehler beim Zurücksetzen der benutzerdefinierten Modi: {{error}}",
 			"modeNotFound": "Schreibfehler: Modus nicht gefunden",
 			"noWorkspaceForProject": "Kein Arbeitsbereich-Ordner für projektspezifischen Modus gefunden"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"mdm": {

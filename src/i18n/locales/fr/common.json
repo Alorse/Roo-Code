@@ -120,6 +120,7 @@
 				"description": "Chemin optionnel vers votre CLI Claude Code. Par défaut 'claude' si non défini.",
 				"placeholder": "Par défaut : claude"
 			}
+<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -132,6 +133,8 @@
 			"resetFailed": "Échec de la réinitialisation des modes personnalisés : {{error}}",
 			"modeNotFound": "Erreur d'écriture : Mode non trouvé",
 			"noWorkspaceForProject": "Aucun dossier d'espace de travail trouvé pour le mode spécifique au projet"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"mdm": {

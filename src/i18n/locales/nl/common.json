@@ -122,6 +122,7 @@
 			}
 		}
 	},
+<<<<<<< HEAD
 	"customModes": {
 		"errors": {
 			"yamlParseError": "Ongeldige YAML in .roomodes bestand op regel {{line}}. Controleer:\n• Juiste inspringing (gebruik spaties, geen tabs)\n• Overeenkomende aanhalingstekens en haakjes\n• Geldige YAML syntaxis",
@@ -134,6 +135,8 @@
 			"noWorkspaceForProject": "Geen workspace map gevonden voor projectspecifieke modus"
 		}
 	},
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "Je organisatie vereist Roo Code Cloud-authenticatie. Log in om door te gaan.",

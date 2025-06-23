@@ -120,6 +120,7 @@
 				"description": "Claude Code CLI へのオプションのパス。設定されていない場合は、デフォルトで「claude」になります。",
 				"placeholder": "デフォルト: claude"
 			}
+<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -132,6 +133,8 @@
 			"resetFailed": "カスタムモードのリセットに失敗しました：{{error}}",
 			"modeNotFound": "書き込みエラー：モードが見つかりません",
 			"noWorkspaceForProject": "プロジェクト固有モード用のワークスペースフォルダーが見つかりません"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"mdm": {

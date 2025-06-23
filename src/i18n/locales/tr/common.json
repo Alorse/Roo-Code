@@ -120,6 +120,7 @@
 				"description": "Claude Code CLI'nizin isteğe bağlı yolu. Ayarlanmazsa varsayılan olarak 'claude' olur.",
 				"placeholder": "Varsayılan: claude"
 			}
+<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -132,6 +133,8 @@
 			"resetFailed": "Özel modları sıfırlama başarısız: {{error}}",
 			"modeNotFound": "Yazma hatası: Mod bulunamadı",
 			"noWorkspaceForProject": "Proje özel modu için çalışma alanı klasörü bulunamadı"
+=======
+>>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"mdm": {
