@@ -48,3 +48,6 @@ logs
 
 # Ignore copilot instructions file
 .github/copilot-instructions.md
+
+# Ignore memory-bank directory
+memory-bank/
