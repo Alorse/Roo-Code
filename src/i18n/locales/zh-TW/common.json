@@ -62,7 +62,14 @@
 		"share_no_active_task": "沒有活躍的工作可分享",
 		"share_auth_required": "需要身份驗證。請登入以分享工作。",
 		"share_not_enabled": "此組織未啟用工作分享功能。",
-		"share_task_not_found": "未找到工作或存取被拒絕。"
+		"share_task_not_found": "未找到工作或存取被拒絕。",
+		"claudeCode": {
+			"processExited": "Claude Code 程序退出，退出碼：{{exitCode}}。",
+			"errorOutput": "錯誤輸出：{{output}}",
+			"processExitedWithError": "Claude Code 程序退出，退出碼：{{exitCode}}。錯誤輸出：{{output}}",
+			"stoppedWithReason": "Claude Code 停止，原因：{{reason}}",
+			"apiKeyModelPlanMismatch": "API 金鑰和訂閱方案允許不同的模型。請確保所選模型包含在您的方案中。"
+		}
 	},
 	"warnings": {
 		"no_terminal_content": "沒有選擇終端機內容",
@@ -90,7 +97,9 @@
 	},
 	"tasks": {
 		"canceled": "工作錯誤：它已被使用者停止並取消。",
-		"deleted": "工作失敗：它已被使用者停止並刪除。"
+		"deleted": "工作失敗：它已被使用者停止並刪除。",
+		"incomplete": "工作 #{{taskNumber}} (未完成)",
+		"no_messages": "工作 #{{taskNumber}} (無訊息)"
 	},
 	"storage": {
 		"prompt_custom_path": "輸入自訂會話歷史儲存路徑，留空以使用預設位置",
@@ -105,7 +114,12 @@
 	"settings": {
 		"providers": {
 			"groqApiKey": "Groq API 金鑰",
-			"getGroqApiKey": "取得 Groq API 金鑰"
+			"getGroqApiKey": "取得 Groq API 金鑰",
+			"claudeCode": {
+				"pathLabel": "Claude Code 路徑",
+				"description": "Claude Code CLI 的選用路徑。如果未設定，預設為 'claude'。",
+				"placeholder": "預設: claude"
+			}
 		}
 	},
 	"mdm": {

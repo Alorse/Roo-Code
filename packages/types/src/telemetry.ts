@@ -31,6 +31,10 @@ export enum TelemetryEventName {
 	CHECKPOINT_RESTORED = "Checkpoint Restored",
 	CHECKPOINT_DIFFED = "Checkpoint Diffed",
 
+	TAB_SHOWN = "Tab Shown",
+	MODE_SETTINGS_CHANGED = "Mode Setting Changed",
+	CUSTOM_MODE_CREATED = "Custom Mode Created",
+
 	CONTEXT_CONDENSED = "Context Condensed",
 	SLIDING_WINDOW_TRUNCATION = "Sliding Window Truncation",
 
@@ -45,6 +49,16 @@ export enum TelemetryEventName {
 	MARKETPLACE_ITEM_REMOVED = "Marketplace Item Removed",
 	MARKETPLACE_TAB_VIEWED = "Marketplace Tab Viewed",
 	MARKETPLACE_INSTALL_BUTTON_CLICKED = "Marketplace Install Button Clicked",
+
+	SHARE_BUTTON_CLICKED = "Share Button Clicked",
+	SHARE_ORGANIZATION_CLICKED = "Share Organization Clicked",
+	SHARE_PUBLIC_CLICKED = "Share Public Clicked",
+	SHARE_CONNECT_TO_CLOUD_CLICKED = "Share Connect To Cloud Clicked",
+
+	ACCOUNT_CONNECT_CLICKED = "Account Connect Clicked",
+	ACCOUNT_CONNECT_SUCCESS = "Account Connect Success",
+	ACCOUNT_LOGOUT_CLICKED = "Account Logout Clicked",
+	ACCOUNT_LOGOUT_SUCCESS = "Account Logout Success",
 
 	SCHEMA_VALIDATION_ERROR = "Schema Validation Error",
 	DIFF_APPLICATION_ERROR = "Diff Application Error",
@@ -64,6 +78,7 @@ export const appPropertiesSchema = z.object({
 	editorName: z.string(),
 	language: z.string(),
 	mode: z.string(),
+	cloudIsAuthenticated: z.boolean().optional(),
 })
 
 export const taskPropertiesSchema = z.object({
@@ -74,12 +89,25 @@ export const taskPropertiesSchema = z.object({
 	isSubtask: z.boolean().optional(),
 })
 
+export const gitPropertiesSchema = z.object({
+	repositoryUrl: z.string().optional(),
+	repositoryName: z.string().optional(),
+	defaultBranch: z.string().optional(),
+})
+
 export const telemetryPropertiesSchema = z.object({
 	...appPropertiesSchema.shape,
 	...taskPropertiesSchema.shape,
+	...gitPropertiesSchema.shape,
+})
+
+export const cloudTelemetryPropertiesSchema = z.object({
+	...telemetryPropertiesSchema.shape,
 })
 
 export type TelemetryProperties = z.infer<typeof telemetryPropertiesSchema>
+export type CloudTelemetryProperties = z.infer<typeof cloudTelemetryPropertiesSchema>
+export type GitProperties = z.infer<typeof gitPropertiesSchema>
 
 /**
  * TelemetryEvent
@@ -113,19 +141,32 @@ export const rooCodeTelemetryEventSchema = z.discriminatedUnion("type", [
 			TelemetryEventName.AUTHENTICATION_INITIATED,
 			TelemetryEventName.MARKETPLACE_ITEM_INSTALLED,
 			TelemetryEventName.MARKETPLACE_ITEM_REMOVED,
+			TelemetryEventName.MARKETPLACE_TAB_VIEWED,
+			TelemetryEventName.MARKETPLACE_INSTALL_BUTTON_CLICKED,
+			TelemetryEventName.SHARE_BUTTON_CLICKED,
+			TelemetryEventName.SHARE_ORGANIZATION_CLICKED,
+			TelemetryEventName.SHARE_PUBLIC_CLICKED,
+			TelemetryEventName.SHARE_CONNECT_TO_CLOUD_CLICKED,
+			TelemetryEventName.ACCOUNT_CONNECT_CLICKED,
+			TelemetryEventName.ACCOUNT_CONNECT_SUCCESS,
+			TelemetryEventName.ACCOUNT_LOGOUT_CLICKED,
+			TelemetryEventName.ACCOUNT_LOGOUT_SUCCESS,
 			TelemetryEventName.SCHEMA_VALIDATION_ERROR,
 			TelemetryEventName.DIFF_APPLICATION_ERROR,
 			TelemetryEventName.SHELL_INTEGRATION_ERROR,
 			TelemetryEventName.CONSECUTIVE_MISTAKE_ERROR,
 			TelemetryEventName.CONTEXT_CONDENSED,
 			TelemetryEventName.SLIDING_WINDOW_TRUNCATION,
+			TelemetryEventName.TAB_SHOWN,
+			TelemetryEventName.MODE_SETTINGS_CHANGED,
+			TelemetryEventName.CUSTOM_MODE_CREATED,
 		]),
-		properties: telemetryPropertiesSchema,
+		properties: cloudTelemetryPropertiesSchema,
 	}),
 	z.object({
 		type: z.literal(TelemetryEventName.TASK_MESSAGE),
 		properties: z.object({
-			...telemetryPropertiesSchema.shape,
+			...cloudTelemetryPropertiesSchema.shape,
 			taskId: z.string(),
 			message: clineMessageSchema,
 		}),
@@ -133,7 +174,7 @@ export const rooCodeTelemetryEventSchema = z.discriminatedUnion("type", [
 	z.object({
 		type: z.literal(TelemetryEventName.LLM_COMPLETION),
 		properties: z.object({
-			...telemetryPropertiesSchema.shape,
+			...cloudTelemetryPropertiesSchema.shape,
 			inputTokens: z.number(),
 			outputTokens: z.number(),
 			cacheReadTokens: z.number().optional(),
@@ -159,6 +200,7 @@ export type TelemetryEventSubscription =
 
 export interface TelemetryPropertiesProvider {
 	getTelemetryProperties(): Promise<TelemetryProperties>
+	getCloudTelemetryProperties?(): Promise<CloudTelemetryProperties>
 }
 
 /**
