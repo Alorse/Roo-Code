@@ -58,6 +58,10 @@ export class TerminalInlineChat {
 
 	private updateVisibility(): void {
 		const activeTerminal = vscode.window.activeTerminal
+
+		// Show StatusBar only if there's an active terminal
+		// Note: Even if panel is closed, user can still use ⌘K shortcut
+		// and the command will be inserted when they open the terminal
 		if (activeTerminal) {
 			// Create and show status bar item only when terminal is active
 			if (!this.statusBarItem) {
