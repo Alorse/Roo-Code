@@ -36,6 +36,7 @@ suite("Roo Code Extension", function () {
 			"terminalAddToContext",
 			"terminalFixCommand",
 			"terminalExplainCommand",
+			"generateCommand",
 		]
 
 		const commands = new Set((await vscode.commands.getCommands(true)).filter((cmd) => cmd.startsWith("roo-cline")))

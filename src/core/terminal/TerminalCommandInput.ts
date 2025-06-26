@@ -2,8 +2,8 @@ import * as vscode from "vscode"
 import { ClineProvider } from "../webview/ClineProvider"
 import { singleCompletionHandler } from "../../utils/single-completion-handler"
 
-export class TerminalInlineChat {
-	private static instance: TerminalInlineChat | undefined
+export class TerminalCommandInput {
+	private static instance: TerminalCommandInput | undefined
 	private statusBarItem: vscode.StatusBarItem | undefined
 	private inputBox: vscode.InputBox | undefined
 	private clineProvider: ClineProvider
@@ -32,11 +32,11 @@ export class TerminalInlineChat {
 		})
 	}
 
-	public static getInstance(context: vscode.ExtensionContext, clineProvider: ClineProvider): TerminalInlineChat {
-		if (!TerminalInlineChat.instance) {
-			TerminalInlineChat.instance = new TerminalInlineChat(context, clineProvider)
+	public static getInstance(context: vscode.ExtensionContext, clineProvider: ClineProvider): TerminalCommandInput {
+		if (!TerminalCommandInput.instance) {
+			TerminalCommandInput.instance = new TerminalCommandInput(context, clineProvider)
 		}
-		return TerminalInlineChat.instance
+		return TerminalCommandInput.instance
 	}
 
 	private setupStatusBarItem(): void {
@@ -200,6 +200,6 @@ Command:`
 	public dispose(): void {
 		this.statusBarItem?.dispose()
 		this.inputBox?.dispose()
-		TerminalInlineChat.instance = undefined
+		TerminalCommandInput.instance = undefined
 	}
 }
