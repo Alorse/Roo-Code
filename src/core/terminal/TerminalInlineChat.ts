@@ -1,9 +1,10 @@
 import * as vscode from "vscode"
 import { ClineProvider } from "../webview/ClineProvider"
+import { singleCompletionHandler } from "../../utils/single-completion-handler"
 
 export class TerminalInlineChat {
 	private static instance: TerminalInlineChat | undefined
-	private statusBarItem: vscode.StatusBarItem
+	private statusBarItem: vscode.StatusBarItem | undefined
 	private inputBox: vscode.InputBox | undefined
 	private clineProvider: ClineProvider
 
@@ -13,13 +14,22 @@ export class TerminalInlineChat {
 	) {
 		this.clineProvider = clineProvider
 
-		// Create status bar item
-		this.statusBarItem = vscode.window.createStatusBarItem(
-			vscode.StatusBarAlignment.Right,
-			100, // Priority
-		)
+		// Don't create status bar item immediately - only when terminal is active
+		this.updateVisibility()
 
-		this.setupStatusBarItem()
+		// Listen for terminal changes
+		vscode.window.onDidChangeActiveTerminal(() => {
+			this.updateVisibility()
+		})
+
+		// Listen for terminal close events
+		vscode.window.onDidCloseTerminal(() => {
+			this.updateVisibility()
+		})
+
+		vscode.window.onDidChangeWindowState(() => {
+			this.updateVisibility()
+		})
 	}
 
 	public static getInstance(context: vscode.ExtensionContext, clineProvider: ClineProvider): TerminalInlineChat {
@@ -30,32 +40,37 @@ export class TerminalInlineChat {
 	}
 
 	private setupStatusBarItem(): void {
+		if (!this.statusBarItem) {
+			this.statusBarItem = vscode.window.createStatusBarItem(
+				vscode.StatusBarAlignment.Right,
+				100, // Priority
+			)
+		}
+
 		const isMac = process.platform === "darwin"
 		const shortcut = isMac ? "⌘K" : "Ctrl+K"
 
 		this.statusBarItem.text = `$(terminal) ${shortcut} to generate command`
 		this.statusBarItem.tooltip = "Generate terminal command with AI"
 		this.statusBarItem.command = "roo-cline.generateCommand"
-
-		// Show only when terminal is active
-		this.updateVisibility()
-
-		// Listen for active editor changes to show/hide
-		vscode.window.onDidChangeActiveTerminal(() => {
-			this.updateVisibility()
-		})
-
-		vscode.window.onDidChangeWindowState(() => {
-			this.updateVisibility()
-		})
+		this.statusBarItem.show()
 	}
 
 	private updateVisibility(): void {
 		const activeTerminal = vscode.window.activeTerminal
 		if (activeTerminal) {
-			this.statusBarItem.show()
+			// Create and show status bar item only when terminal is active
+			if (!this.statusBarItem) {
+				this.setupStatusBarItem()
+			} else {
+				this.statusBarItem.show()
+			}
 		} else {
-			this.statusBarItem.hide()
+			// Hide and dispose status bar item when no terminal is active
+			if (this.statusBarItem) {
+				this.statusBarItem.dispose()
+				this.statusBarItem = undefined
+			}
 		}
 	}
 
@@ -107,28 +122,79 @@ export class TerminalInlineChat {
 			return
 		}
 
-		// Create a precise prompt for command generation
-		const commandPrompt = `Generate ONLY the terminal command for this request, no explanations, no markdown, no additional text. Just the raw command that can be executed directly:
+		// Show progress indicator
+		await vscode.window.withProgress(
+			{
+				location: vscode.ProgressLocation.Notification,
+				title: "Generating command...",
+				cancellable: false,
+			},
+			async (progress) => {
+				try {
+					// Get the current API configuration
+					const { apiConfiguration } = await this.clineProvider.getState()
+
+					// Create a precise prompt for command generation
+					const commandPrompt = `Generate ONLY the terminal command for this request. Return just the raw command with no explanations, no markdown, no additional text, no code blocks. Just the executable command:
 
 ${command}
 
 Command:`
 
-		// Send the prompt directly to the chat
-		await this.clineProvider.postMessageToWebview({
-			type: "invoke",
-			invoke: "setChatBoxMessage",
-			text: commandPrompt,
-		})
+					// Call the API directly to generate the command
+					const generatedCommand = await singleCompletionHandler(apiConfiguration, commandPrompt)
 
-		// Show a message to the user
-		vscode.window.showInformationMessage(
-			"Command request sent to Roo Code chat. The generated command will appear in the chat.",
+					if (generatedCommand && generatedCommand.trim()) {
+						// Clean up the response (remove any potential markdown or extra text)
+						const cleanCommand = this.extractCommand(generatedCommand)
+
+						if (cleanCommand) {
+							// Insert the command into the active terminal
+							activeTerminal.sendText(cleanCommand, false) // false = don't execute immediately
+							vscode.window.showInformationMessage(`Command generated: ${cleanCommand}`)
+						} else {
+							vscode.window.showErrorMessage("Could not extract a valid command from the response")
+						}
+					} else {
+						vscode.window.showErrorMessage("Failed to generate command")
+					}
+				} catch (error) {
+					console.error("Error generating command:", error)
+					vscode.window.showErrorMessage(
+						`Error generating command: ${error instanceof Error ? error.message : "Unknown error"}`,
+					)
+				}
+			},
 		)
 	}
 
+	private extractCommand(text: string): string | null {
+		// Remove markdown code blocks
+		let command = text.replace(/```[\s\S]*?```/g, "").trim()
+
+		// Remove common prefixes
+		command = command.replace(/^(Command:|Here's the command:|The command is:|Generated command:)/i, "").trim()
+
+		// Take only the first line if multiple lines
+		const lines = command.split("\n")
+		command = lines[0].trim()
+
+		// Basic validation - should look like a command
+		if (
+			command &&
+			command.length > 0 &&
+			!command.includes("I ") &&
+			!command.includes("You ") &&
+			!command.includes("Here")
+		) {
+			return command
+		}
+
+		return null
+	}
+
 	public dispose(): void {
-		this.statusBarItem.dispose()
+		this.statusBarItem?.dispose()
 		this.inputBox?.dispose()
 		TerminalInlineChat.instance = undefined
 	}
