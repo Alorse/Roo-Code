@@ -295,7 +295,8 @@
 		"keybindings": [
 			{
 				"command": "roo-cline.generateCommand",
-				"key": "cmd+k",
+				"key": "ctrl+k",
+				"mac": "cmd+k",
 				"when": "terminalFocus"
 			}
 		],
