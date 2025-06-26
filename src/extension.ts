@@ -110,6 +110,11 @@ export async function activate(context: vscode.ExtensionContext) {
 	const provider = new ClineProvider(context, outputChannel, "sidebar", contextProxy, codeIndexManager, mdmService)
 	TelemetryService.instance.setProvider(provider)
 
+	// Initialize terminal inline chat
+	const { TerminalInlineChat } = await import("./core/terminal/TerminalInlineChat")
+	const terminalInlineChat = TerminalInlineChat.getInstance(context, provider)
+	context.subscriptions.push(terminalInlineChat)
+
 	if (codeIndexManager) {
 		context.subscriptions.push(codeIndexManager)
 	}

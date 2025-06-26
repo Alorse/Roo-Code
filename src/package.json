@@ -292,6 +292,13 @@
 				"label": "%views.terminalMenu.label%"
 			}
 		],
+		"keybindings": [
+			{
+				"command": "roo-cline.generateCommand",
+				"key": "cmd+k",
+				"when": "terminalFocus"
+			}
+		],
 		"configuration": {
 			"title": "%configuration.title%",
 			"properties": {

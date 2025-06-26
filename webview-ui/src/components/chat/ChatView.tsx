@@ -683,6 +683,11 @@ const ChatViewComponent: React.ForwardRefRenderFunction<ChatViewRef, ChatViewPro
 						case "setChatBoxMessage":
 							handleSetChatBoxMessage(message.text ?? "", message.images ?? [])
 							break
+						case "generateCommand":
+							// Handle command generation request
+							const commandPrompt = `Generate a terminal command for: ${message.text ?? ""}`
+							handleSetChatBoxMessage(commandPrompt, [])
+							break
 						case "primaryButtonClick":
 							handlePrimaryButtonClick(message.text ?? "", message.images ?? [])
 							break
@@ -730,7 +735,7 @@ const ChatViewComponent: React.ForwardRefRenderFunction<ChatViewRef, ChatViewPro
 			}
 		},
 		50,
-		[isHidden, sendingDisabled, enableButtons]
+		[isHidden, sendingDisabled, enableButtons],
 	)
 
 	const visibleMessages = useMemo(() => {
@@ -1095,8 +1100,8 @@ const ChatViewComponent: React.ForwardRefRenderFunction<ChatViewRef, ChatViewPro
 
 	useEffect(() => {
 		return () => {
-			if (scrollToBottomSmooth && typeof (scrollToBottomSmooth as any).cancel === 'function') {
-				(scrollToBottomSmooth as any).cancel()
+			if (scrollToBottomSmooth && typeof (scrollToBottomSmooth as any).cancel === "function") {
+				;(scrollToBottomSmooth as any).cancel()
 			}
 		}
 	}, [scrollToBottomSmooth])
