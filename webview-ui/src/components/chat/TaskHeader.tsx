@@ -128,7 +128,7 @@ const TaskHeader = ({
 					<>
 						<div
 							ref={textContainerRef}
-							className="-mt-0.5 text-vscode-font-size overflow-y-auto break-words break-anywhere relative">
+							className="-mt-0.5 text-lg overflow-y-auto break-words break-anywhere relative">
 							<div
 								ref={textRef}
 								className="overflow-auto max-h-80 whitespace-pre-wrap break-words break-anywhere"

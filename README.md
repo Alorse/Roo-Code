@@ -1,3 +1,5 @@
+**Modified Version Notice:** This installation has been modified by Alorse. For details, please check the [CHANGELOG.md](CHANGELOG.md)
+
 <div align="center">
 <sub>
 

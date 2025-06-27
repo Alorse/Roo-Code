@@ -55,7 +55,6 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 			setInputValue,
 			sendingDisabled,
 			selectApiConfigDisabled,
-			placeholderText,
 			selectedImages,
 			setSelectedImages,
 			onSend,
@@ -84,6 +83,9 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 			codebaseIndexConfig,
 		} = useExtensionState()
 
+		// State to store configurations fetched by ID
+		const [fetchedConfigurations, setFetchedConfigurations] = useState<Record<string, any>>({})
+
 		// Find the ID and display text for the currently selected API configuration
 		const { currentConfigId, displayName } = useMemo(() => {
 			const currentConfig = listApiConfigMeta?.find((config) => config.name === currentApiConfigName)
@@ -92,6 +94,53 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 				displayName: currentApiConfigName || "", // Use the name directly for display
 			}
 		}, [listApiConfigMeta, currentApiConfigName])
+
+		// Function to get model ID from provider configuration
+		const getModelIdForProvider = useCallback((settings: any, provider: string): string | undefined => {
+			switch (provider) {
+				case "openrouter":
+					return settings.openRouterModelId
+				case "glama":
+					return settings.glamaModelId
+				case "unbound":
+					return settings.unboundModelId
+				case "requesty":
+					return settings.requestyModelId
+				case "litellm":
+					return settings.litellmModelId
+				case "openai":
+					return settings.openAiModelId
+				case "ollama":
+					return settings.ollamaModelId
+				case "lmstudio":
+					return settings.lmStudioModelId
+				case "vscode-lm":
+					return settings.vsCodeLmModelSelector?.id
+				default:
+					return settings.apiModelId
+			}
+		}, [])
+
+		// Helper function to get model display name
+		const getModelDisplayName = useCallback(
+			(config: any) => {
+				// Check if we have fetched this configuration
+				const fetchedConfig = fetchedConfigurations[config.id]
+				if (fetchedConfig) {
+					const modelId = getModelIdForProvider(fetchedConfig, config.apiProvider || "")
+					return modelId || "Default"
+				}
+
+				// If we don't have the configuration, request it
+				vscode.postMessage({ type: "getApiConfigurationById", text: config.id })
+
+				// For other configurations, show a placeholder that indicates we need to select it to see the model
+				const provider = config.apiProvider || "Unknown"
+
+				return `${provider} Model`
+			},
+			[getModelIdForProvider, fetchedConfigurations],
+		)
 
 		const [gitCommits, setGitCommits] = useState<any[]>([])
 		const [showDropdown, setShowDropdown] = useState(false)
@@ -136,6 +185,14 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 					setSearchLoading(false)
 					if (message.requestId === searchRequestId) {
 						setFileSearchResults(message.results || [])
+					}
+				} else if (message.type === "apiConfigurationById") {
+					// Handle received API configuration
+					if (message.apiConfigById && message.values?.configId) {
+						setFetchedConfigurations((prev) => ({
+							...prev,
+							[message.values.configId]: message.apiConfigById,
+						}))
 					}
 				}
 			}
@@ -779,7 +836,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 			}
 		})
 
-		const placeholderBottomText = `\n(${t("chat:addContext")}${shouldDisableImages ? `, ${t("chat:dragFiles")}` : `, ${t("chat:dragFilesImages")}`})`
+		const placeholderBottomText = `${t("chat:addContext")}${shouldDisableImages ? `, ${t("chat:dragFiles")}` : `, ${t("chat:dragFilesImages")}`}`
 
 		return (
 			<div
@@ -788,7 +845,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 					"flex",
 					"flex-col",
 					"gap-2",
-					"bg-editor-background",
+					"bg-vscode-input-background",
 					"m-2 mt-1",
 					"p-1.5",
 					"outline-none",
@@ -915,8 +972,8 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 
 									onHeightChange?.(height)
 								}}
-								placeholder={placeholderText}
-								minRows={3}
+								placeholder={placeholderBottomText}
+								minRows={1}
 								maxRows={15}
 								autoFocus={true}
 								className={cn(
@@ -937,7 +994,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 										: "bg-vscode-input-background",
 									"transition-background-color duration-150 ease-in-out",
 									"will-change-background-color",
-									"min-h-[90px]",
+									"min-h-[30px]",
 									"box-border",
 									"rounded",
 									"resize-none",
@@ -959,28 +1016,6 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 									onClick={() => vscode.postMessage({ type: "stopTts" })}>
 									<VolumeX className="size-4" />
 								</Button>
-							)}
-
-							{!inputValue && (
-								<div
-									className={cn(
-										"absolute",
-										"left-2",
-										"flex",
-										"gap-2",
-										"text-xs",
-										"text-descriptionForeground",
-										"pointer-events-none",
-										"z-25",
-										"bottom-1.5",
-										"pr-2",
-										"transition-opacity",
-										"duration-200",
-										"ease-in-out",
-										"opacity-70",
-									)}>
-									{placeholderBottomText}
-								</div>
 							)}
 						</div>
 					</div>
@@ -1028,7 +1063,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 										.filter((config) => pinnedApiConfigs && pinnedApiConfigs[config.id])
 										.map((config) => ({
 											value: config.id,
-											label: config.name,
+											label: `${config.name}: ${getModelDisplayName(config)}`,
 											name: config.name, // Keep name for comparison with currentApiConfigName.
 											type: DropdownOptionType.ITEM,
 											pinned: true,
@@ -1051,7 +1086,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 										.filter((config) => !pinnedApiConfigs || !pinnedApiConfigs[config.id])
 										.map((config) => ({
 											value: config.id,
-											label: config.name,
+											label: `${config.name}: ${getModelDisplayName(config)}`,
 											name: config.name, // Keep name for comparison with currentApiConfigName.
 											type: DropdownOptionType.ITEM,
 											pinned: false,

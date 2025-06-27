@@ -63,7 +63,7 @@ const ChatRow = memo(
 		const prevHeightRef = useRef(0)
 
 		const [chatrow, { height }] = useSize(
-			<div className="px-[15px] py-[10px] pr-[6px]">
+			<div className="px-[15px] py-[10px]">
 				<ChatRowContent {...props} />
 			</div>,
 		)
@@ -138,7 +138,7 @@ export const ChatRowContent = ({
 
 	const normalColor = "var(--vscode-foreground)"
 	const errorColor = "var(--vscode-errorForeground)"
-	const successColor = "var(--vscode-charts-green)"
+	const successColor = "var(--vscode-button-background)"
 	const cancelledColor = "var(--vscode-descriptionForeground)"
 
 	const [icon, title] = useMemo(() => {
@@ -263,6 +263,8 @@ export const ChatRowContent = ({
 		gap: "10px",
 		marginBottom: "10px",
 		wordBreak: "break-word",
+		fontSize: "var(--text-lg)",
+		lineHeight: "1.6",
 	}
 
 	const pStyle: React.CSSProperties = {
@@ -270,6 +272,8 @@ export const ChatRowContent = ({
 		whiteSpace: "pre-wrap",
 		wordBreak: "break-word",
 		overflowWrap: "anywhere",
+		fontSize: "var(--text-lg)",
+		lineHeight: "1.6",
 	}
 
 	const tool = useMemo(
@@ -716,6 +720,7 @@ export const ChatRowContent = ({
 									display: "flex",
 									alignItems: "center",
 									gap: "6px",
+									lineHeight: "1.6",
 								}}>
 								<span className="codicon codicon-arrow-right"></span>
 								{t("chat:subtasks.newTaskContent")}
@@ -753,6 +758,7 @@ export const ChatRowContent = ({
 									display: "flex",
 									alignItems: "center",
 									gap: "6px",
+									lineHeight: "1.6",
 								}}>
 								<span className="codicon codicon-check"></span>
 								{t("chat:subtasks.completionContent")}
@@ -792,6 +798,7 @@ export const ChatRowContent = ({
 										alignItems: "center",
 										justifyContent: "space-between",
 										cursor: "pointer",
+										lineHeight: "1.6",
 									}}
 									onClick={() => setIsDiffErrorExpanded(!isDiffErrorExpanded)}>
 									<div
@@ -883,6 +890,7 @@ export const ChatRowContent = ({
 										display: "flex",
 										alignItems: "center",
 										gap: "6px",
+										lineHeight: "1.6",
 									}}>
 									<span className="codicon codicon-arrow-left"></span>
 									{t("chat:subtasks.resultContent")}
@@ -979,26 +987,43 @@ export const ChatRowContent = ({
 					)
 				case "user_feedback":
 					return (
-						<div className="bg-vscode-editor-background border rounded-xs p-1 overflow-hidden whitespace-pre-wrap">
-							<div className="flex justify-between">
-								<div className="flex-grow px-2 py-1 wrap-anywhere">
-									<Mention text={message.text} withShadow />
+						<div className="w-[90%] flex justify-end mx-auto mr-0">
+							<div
+								className="rounded-lg p-1 overflow-hidden whitespace-pre-wrap w-full"
+								style={{
+									backgroundColor:
+										"color-mix(in srgb, var(--vscode-button-background) 20%, transparent)",
+									border: "1px solid color-mix(in srgb, var(--vscode-button-background) 20%, transparent)",
+								}}>
+								<div className="flex justify-between">
+									<div
+										className="flex-grow px-2 py-1 wrap-anywhere"
+										style={{
+											color: "var(--vscode-list-activeSelectionForeground)",
+											fontSize: "var(--text-lx)",
+											lineHeight: "1.6",
+										}}>
+										<Mention text={message.text} withShadow />
+									</div>
+									<Button
+										variant="ghost"
+										size="icon"
+										className="shrink-0"
+										disabled={isStreaming}
+										onClick={(e) => {
+											e.stopPropagation()
+											vscode.postMessage({ type: "deleteMessage", value: message.ts })
+										}}>
+										<span
+											className="codicon codicon-trash"
+											style={{ color: "var(--vscode-foreground)" }}
+										/>
+									</Button>
 								</div>
-								<Button
-									variant="ghost"
-									size="icon"
-									className="shrink-0"
-									disabled={isStreaming}
-									onClick={(e) => {
-										e.stopPropagation()
-										vscode.postMessage({ type: "deleteMessage", value: message.ts })
-									}}>
-									<span className="codicon codicon-trash" />
-								</Button>
+								{message.images && message.images.length > 0 && (
+									<Thumbnails images={message.images} style={{ marginTop: "8px" }} />
+								)}
 							</div>
-							{message.images && message.images.length > 0 && (
-								<Thumbnails images={message.images} style={{ marginTop: "8px" }} />
-							)}
 						</div>
 					)
 				case "user_feedback_diff":
@@ -1033,7 +1058,18 @@ export const ChatRowContent = ({
 								{icon}
 								{title}
 							</div>
-							<div style={{ color: "var(--vscode-charts-green)", paddingTop: 10 }}>
+							<div
+								style={{
+									backgroundColor:
+										"color-mix(in srgb, var(--vscode-button-background) 10%, transparent)",
+									color: "var(--vscode-list-activeSelectionForeground)",
+									paddingTop: 10,
+									padding: "10px",
+									borderRadius: "6px",
+									border: "1px solid color-mix(in srgb, var(--vscode-button-background) 20%, transparent)",
+									fontSize: "calc(var(--vscode-font-size) * 1.25)",
+									lineHeight: "1.6",
+								}}>
 								<Markdown markdown={message.text} />
 							</div>
 						</>
@@ -1189,7 +1225,7 @@ export const ChatRowContent = ({
 									{icon}
 									{title}
 								</div>
-								<div style={{ color: "var(--vscode-charts-green)", paddingTop: 10 }}>
+								<div style={{ color: "var(--vscode-button-background)", paddingTop: 10 }}>
 									<Markdown markdown={message.text} partial={message.partial} />
 								</div>
 							</div>

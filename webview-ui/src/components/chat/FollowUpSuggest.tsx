@@ -1,6 +1,6 @@
 import { useCallback } from "react"
 import { Edit } from "lucide-react"
-
+import { CheckboxIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui"
 
 import { useAppTranslation } from "@src/i18n/TranslationContext"
@@ -31,9 +31,10 @@ export const FollowUpSuggest = ({ suggestions = [], onSuggestionClick, ts = 1 }:
 				<div key={`${suggestion}-${ts}`} className="w-full relative group">
 					<Button
 						variant="outline"
-						className="text-left whitespace-normal break-words w-full h-auto py-3 justify-start pr-8"
+						className="text-left bg-vscode-editor-background whitespace-normal break-words w-full h-auto py-2 justify-start pr-8 rounded-md"
 						onClick={(event) => handleSuggestionClick(suggestion, event)}
 						aria-label={suggestion}>
+						<CheckboxIcon />
 						<div>{suggestion}</div>
 					</Button>
 					<div
