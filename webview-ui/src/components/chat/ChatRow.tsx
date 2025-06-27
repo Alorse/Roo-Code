@@ -191,8 +191,13 @@ export const ChatRowContent = ({
 				return [
 					<span
 						className="codicon codicon-check"
-						style={{ color: successColor, marginBottom: "-1.5px" }}></span>,
-					<span style={{ color: successColor, fontWeight: "bold" }}>{t("chat:taskCompleted")}</span>,
+						style={{
+							color: "var(--vscode-gitDecoration-untrackedResourceForeground)",
+							marginBottom: "-1.5px",
+						}}></span>,
+					<span style={{ color: "var(--vscode-foreground)", fontWeight: "bold" }}>
+						{t("chat:taskCompleted")}
+					</span>,
 				]
 			case "api_req_retry_delayed":
 				return []
@@ -1077,6 +1082,7 @@ export const ChatRowContent = ({
 									color: "var(--vscode-list-activeSelectionForeground)",
 									paddingTop: 10,
 									padding: "10px",
+									marginTop: 10,
 									borderRadius: "6px",
 									border: "1px solid color-mix(in srgb, var(--vscode-button-background) 20%, transparent)",
 									fontSize: "calc(var(--vscode-font-size) * 1.25)",

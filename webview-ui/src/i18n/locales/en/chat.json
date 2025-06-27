@@ -181,12 +181,12 @@
 		"wantsToInsertAtEnd": " append content to the end of this file"
 	},
 	"directoryOperations": {
-		"wantsToViewTopLevel": " view the top level files in this directory",
-		"didViewTopLevel": "Roo viewed the top level files in this directory",
-		"wantsToViewTopLevelOutsideWorkspace": " view the top level files in this directory (outside workspace)",
-		"didViewTopLevelOutsideWorkspace": "Roo viewed the top level files in this directory (outside workspace)",
+		"wantsToViewTopLevel": "View",
+		"didViewTopLevel": "View",
+		"wantsToViewTopLevelOutsideWorkspace": "View (outside workspace)",
+		"didViewTopLevelOutsideWorkspace": "View (outside workspace)",
 		"wantsToViewRecursive": "View files",
-		"didViewRecursive": "Roo recursively viewed all files in this directory",
+		"didViewRecursive": "View",
 		"wantsToViewRecursiveOutsideWorkspace": "View files (outside workspace)",
 		"didViewRecursiveOutsideWorkspace": "Roo recursively viewed all files in this directory (outside workspace)",
 		"wantsToViewDefinitions": " view source code definition names used in this directory",
