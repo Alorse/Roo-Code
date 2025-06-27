@@ -308,7 +308,6 @@
 			"pathLabel": "클로드 코드 경로",
 			"description": "Claude Code CLI의 선택적 경로입니다. 설정하지 않으면 'claude'가 기본값입니다.",
 			"placeholder": "기본값: claude"
-<<<<<<< HEAD
 		},
 		"geminiCli": {
 			"description": "이 공급자는 Gemini CLI 도구의 OAuth 인증을 사용하며 API 키가 필요하지 않습니다.",
@@ -324,8 +323,6 @@
 			"requirement4": "API 키를 사용하지 않습니다 - 인증은 OAuth를 통해 처리됩니다",
 			"requirement5": "Gemini CLI 도구가 먼저 설치되고 인증되어야 합니다",
 			"freeAccess": "OAuth 인증을 통한 무료 액세스"
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"browser": {

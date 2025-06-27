@@ -308,7 +308,6 @@
 			"pathLabel": "Claude Code Yolu",
 			"description": "Claude Code CLI'nize isteğe bağlı yol. Ayarlanmazsa varsayılan olarak 'claude' kullanılır.",
 			"placeholder": "Varsayılan: claude"
-<<<<<<< HEAD
 		},
 		"geminiCli": {
 			"description": "Bu sağlayıcı Gemini CLI aracından OAuth kimlik doğrulaması kullanır ve API anahtarları gerektirmez.",
@@ -324,8 +323,6 @@
 			"requirement4": "API anahtarları kullanmaz - kimlik doğrulama OAuth ile yapılır",
 			"requirement5": "Gemini CLI aracının önce yüklenmesi ve kimlik doğrulaması yapılması gerekir",
 			"freeAccess": "OAuth kimlik doğrulaması ile ücretsiz erişim"
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"browser": {

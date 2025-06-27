@@ -352,7 +352,6 @@
 			"pathLabel": "Claude Code Path",
 			"description": "Optional path to your Claude Code CLI. Defaults to 'claude' if not set.",
 			"placeholder": "Default: claude"
-<<<<<<< HEAD
 		},
 		"geminiCli": {
 			"description": "This provider uses OAuth authentication from the Gemini CLI tool and does not require API keys.",
@@ -368,8 +367,6 @@
 			"requirement4": "Does not use API keys - authentication is handled via OAuth",
 			"requirement5": "Requires the Gemini CLI tool to be installed and authenticated first",
 			"freeAccess": "Free tier access via OAuth authentication"
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 		}
 	},
 	"browser": {
