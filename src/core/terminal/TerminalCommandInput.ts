@@ -1,6 +1,7 @@
 import * as vscode from "vscode"
 import { ClineProvider } from "../webview/ClineProvider"
 import { singleCompletionHandler } from "../../utils/single-completion-handler"
+import { t } from "../../i18n"
 
 export class TerminalCommandInput {
 	private static instance: TerminalCommandInput | undefined
@@ -50,8 +51,8 @@ export class TerminalCommandInput {
 		const isMac = process.platform === "darwin"
 		const shortcut = isMac ? "⌘K" : "Ctrl+K"
 
-		this.statusBarItem.text = `$(terminal) ${shortcut} to generate command`
-		this.statusBarItem.tooltip = "Generate terminal command with AI"
+		this.statusBarItem.text = t("common:terminalCommand:statusBar.text", { shortcut })
+		this.statusBarItem.tooltip = t("common:terminalCommand:statusBar.tooltip")
 		this.statusBarItem.command = "roo-cline.generateCommand"
 		this.statusBarItem.show()
 	}
@@ -78,7 +79,7 @@ export class TerminalCommandInput {
 		}
 	}
 
-	public async showInlineChat(initialPrompt?: string): Promise<void> {
+	public async showInputBox(initialPrompt?: string): Promise<void> {
 		// Dispose existing input box if any
 		if (this.inputBox) {
 			this.inputBox.dispose()
@@ -86,8 +87,8 @@ export class TerminalCommandInput {
 
 		// Create a new input box that appears as an overlay
 		this.inputBox = vscode.window.createInputBox()
-		this.inputBox.title = "Generate Terminal Command"
-		this.inputBox.placeholder = "Command instructions (e.g., 'List files in current directory')"
+		this.inputBox.title = t("common:terminalCommand:inputBox.title")
+		this.inputBox.placeholder = t("common:terminalCommand:inputBox.placeholder")
 
 		// Set initial value if provided
 		if (initialPrompt) {
@@ -122,7 +123,7 @@ export class TerminalCommandInput {
 	private async handleCommandSubmit(command: string): Promise<void> {
 		const activeTerminal = vscode.window.activeTerminal
 		if (!activeTerminal) {
-			vscode.window.showErrorMessage("No active terminal found")
+			vscode.window.showErrorMessage(t("common:terminalCommand:errors.noActiveTerminal"))
 			return
 		}
 
@@ -130,7 +131,7 @@ export class TerminalCommandInput {
 		await vscode.window.withProgress(
 			{
 				location: vscode.ProgressLocation.Notification,
-				title: "Generating command...",
+				title: t("common:terminalCommand:progress.generatingCommand"),
 				cancellable: false,
 			},
 			async (progress) => {
@@ -155,17 +156,24 @@ Command:`
 						if (cleanCommand) {
 							// Insert the command into the active terminal
 							activeTerminal.sendText(cleanCommand, false) // false = don't execute immediately
-							vscode.window.showInformationMessage(`Command generated: ${cleanCommand}`)
+							vscode.window.showInformationMessage(
+								t("common:terminalCommand:info.commandGenerated", { command: cleanCommand }),
+							)
 						} else {
-							vscode.window.showErrorMessage("Could not extract a valid command from the response")
+							vscode.window.showErrorMessage(t("common:terminalCommand:errors.couldNotExtractCommand"))
 						}
 					} else {
-						vscode.window.showErrorMessage("Failed to generate command")
+						vscode.window.showErrorMessage(t("common:terminalCommand:errors.failedToGenerate"))
 					}
 				} catch (error) {
 					console.error("Error generating command:", error)
 					vscode.window.showErrorMessage(
-						`Error generating command: ${error instanceof Error ? error.message : "Unknown error"}`,
+						t("common:terminalCommand:errors.generationError", {
+							message:
+								error instanceof Error
+									? error.message
+									: t("common:terminalCommand:errors.unknownError"),
+						}),
 					)
 				}
 			},
