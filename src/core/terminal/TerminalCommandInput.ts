@@ -140,7 +140,7 @@ export class TerminalCommandInput {
 					const { apiConfiguration } = await this.clineProvider.getState()
 
 					// Create a precise prompt for command generation
-					const commandPrompt = `Generate ONLY the terminal command for this request. Return just the raw command with no explanations, no markdown, no additional text, no code blocks. Just the executable command:
+					const commandPrompt = `Generate ONLY the terminal command for the following request. If the command requires parameters, use clear placeholders in ALL CAPS (e.g., FILENAME, DIRECTORY, PORT) instead of example values. Do NOT include explanations, markdown, code blocks, or any extra text—just the raw, executable command with placeholders if needed.
 
 ${command}
 
