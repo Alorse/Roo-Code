@@ -7,6 +7,7 @@ import { TelemetryService } from "@roo-code/telemetry"
 import { Package } from "../shared/package"
 import { getCommand } from "../utils/commands"
 import { ClineProvider } from "../core/webview/ClineProvider"
+import { TerminalCommandInput } from "../core/terminal/TerminalCommandInput"
 import { ContextProxy } from "../core/config/ContextProxy"
 import { focusPanel } from "../utils/focusPanel"
 
@@ -216,6 +217,16 @@ const getCommandsMap = ({ context, outputChannel, provider }: RegisterCommandOpt
 		}
 
 		visibleProvider.postMessageToWebview({ type: "acceptInput" })
+	},
+	generateCommand: async () => {
+		const visibleProvider = getVisibleProviderOrLog(outputChannel)
+		if (!visibleProvider) {
+			return
+		}
+
+		// Show the terminal command input
+		const terminalCommandInput = TerminalCommandInput.getInstance(context, visibleProvider)
+		await terminalCommandInput.showInputBox()
 	},
 })
 

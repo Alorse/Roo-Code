@@ -125,7 +125,6 @@
 				"description": "Claude Code CLI 的可选路径。如果未设置，默认为 'claude'。",
 				"placeholder": "默认: claude"
 			}
-<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -138,8 +137,29 @@
 			"resetFailed": "重置自定义模式失败：{{error}}",
 			"modeNotFound": "写入错误：未找到模式",
 			"noWorkspaceForProject": "未找到项目特定模式的工作区文件夹"
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
+		}
+	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} 生成命令",
+			"tooltip": "使用AI生成终端命令"
+		},
+		"inputBox": {
+			"title": "生成终端命令",
+			"placeholder": "命令说明（例如：“列出当前目录中的文件”）"
+		},
+		"errors": {
+			"noActiveTerminal": "未找到活动终端",
+			"couldNotExtractCommand": "无法从响应中提取有效命令",
+			"failedToGenerate": "生成命令失败",
+			"generationError": "生成命令时出错：{{message}}",
+			"unknownError": "未知错误"
+		},
+		"progress": {
+			"generatingCommand": "正在生成命令..."
+		},
+		"info": {
+			"commandGenerated": "命令已生成：{{command}}"
 		}
 	},
 	"mdm": {

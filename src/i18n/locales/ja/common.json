@@ -120,7 +120,6 @@
 				"description": "Claude Code CLI へのオプションのパス。設定されていない場合は、デフォルトで「claude」になります。",
 				"placeholder": "デフォルト: claude"
 			}
-<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -133,8 +132,29 @@
 			"resetFailed": "カスタムモードのリセットに失敗しました：{{error}}",
 			"modeNotFound": "書き込みエラー：モードが見つかりません",
 			"noWorkspaceForProject": "プロジェクト固有モード用のワークスペースフォルダーが見つかりません"
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
+		}
+	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} でコマンドを生成",
+			"tooltip": "AIでターミナルコマンドを生成"
+		},
+		"inputBox": {
+			"title": "ターミナルコマンドを生成",
+			"placeholder": "コマンドの指示（例：「現在のディレクトリのファイルを一覧表示」）"
+		},
+		"errors": {
+			"noActiveTerminal": "アクティブなターミナルが見つかりません",
+			"couldNotExtractCommand": "応答から有効なコマンドを抽出できませんでした",
+			"failedToGenerate": "コマンドの生成に失敗しました",
+			"generationError": "コマンドの生成中にエラーが発生しました：{{message}}",
+			"unknownError": "不明なエラー"
+		},
+		"progress": {
+			"generatingCommand": "コマンドを生成中..."
+		},
+		"info": {
+			"commandGenerated": "コマンドが生成されました：{{command}}"
 		}
 	},
 	"mdm": {

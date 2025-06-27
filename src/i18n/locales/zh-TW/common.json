@@ -120,7 +120,6 @@
 				"description": "Claude Code CLI 的選用路徑。如果未設定，預設為 'claude'。",
 				"placeholder": "預設: claude"
 			}
-<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -133,8 +132,29 @@
 			"resetFailed": "重設自訂模式失敗：{{error}}",
 			"modeNotFound": "寫入錯誤：未找到模式",
 			"noWorkspaceForProject": "未找到專案特定模式的工作區資料夾"
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
+		}
+	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} 生成命令",
+			"tooltip": "使用 AI 生成終端機命令"
+		},
+		"inputBox": {
+			"title": "生成終端機命令",
+			"placeholder": "命令說明（例如：「列出目前目錄中的檔案」）"
+		},
+		"errors": {
+			"noActiveTerminal": "未找到作用中終端機",
+			"couldNotExtractCommand": "無法從回應中提取有效命令",
+			"failedToGenerate": "生成命令失敗",
+			"generationError": "生成命令時發生錯誤：{{message}}",
+			"unknownError": "未知錯誤"
+		},
+		"progress": {
+			"generatingCommand": "正在生成命令..."
+		},
+		"info": {
+			"commandGenerated": "命令已生成：{{command}}"
 		}
 	},
 	"mdm": {

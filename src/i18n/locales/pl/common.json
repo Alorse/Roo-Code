@@ -120,7 +120,6 @@
 				"description": "Opcjonalna ścieżka do Twojego CLI Claude Code. Domyślnie 'claude', jeśli nie ustawiono.",
 				"placeholder": "Domyślnie: claude"
 			}
-<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -133,8 +132,29 @@
 			"resetFailed": "Resetowanie trybów niestandardowych nie powiodło się: {{error}}",
 			"modeNotFound": "Błąd zapisu: Tryb nie został znaleziony",
 			"noWorkspaceForProject": "Nie znaleziono folderu obszaru roboczego dla trybu specyficznego dla projektu"
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
+		}
+	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} aby wygenerować polecenie",
+			"tooltip": "Generuj polecenie terminala za pomocą AI"
+		},
+		"inputBox": {
+			"title": "Generuj polecenie terminala",
+			"placeholder": "Instrukcje polecenia (np. 'Wyświetl pliki w bieżącym katalogu')"
+		},
+		"errors": {
+			"noActiveTerminal": "Nie znaleziono aktywnego terminala",
+			"couldNotExtractCommand": "Nie można było wyodrębnić prawidłowego polecenia z odpowiedzi",
+			"failedToGenerate": "Nie udało się wygenerować polecenia",
+			"generationError": "Błąd podczas generowania polecenia: {{message}}",
+			"unknownError": "Nieznany błąd"
+		},
+		"progress": {
+			"generatingCommand": "Generowanie polecenia..."
+		},
+		"info": {
+			"commandGenerated": "Polecenie wygenerowane: {{command}}"
 		}
 	},
 	"mdm": {

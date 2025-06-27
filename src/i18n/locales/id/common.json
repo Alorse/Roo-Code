@@ -122,7 +122,6 @@
 			}
 		}
 	},
-<<<<<<< HEAD
 	"customModes": {
 		"errors": {
 			"yamlParseError": "YAML tidak valid dalam file .roomodes pada baris {{line}}. Silakan periksa:\n• Indentasi yang benar (gunakan spasi, bukan tab)\n• Tanda kutip dan kurung yang cocok\n• Sintaks YAML yang valid",
@@ -135,8 +134,29 @@
 			"noWorkspaceForProject": "Tidak ditemukan folder workspace untuk mode khusus proyek"
 		}
 	},
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} untuk menghasilkan perintah",
+			"tooltip": "Hasilkan perintah terminal dengan AI"
+		},
+		"inputBox": {
+			"title": "Hasilkan Perintah Terminal",
+			"placeholder": "Instruksi perintah (misalnya, 'Daftar file di direktori saat ini')"
+		},
+		"errors": {
+			"noActiveTerminal": "Tidak ada terminal aktif ditemukan",
+			"couldNotExtractCommand": "Tidak dapat mengekstrak perintah yang valid dari respons",
+			"failedToGenerate": "Gagal menghasilkan perintah",
+			"generationError": "Error menghasilkan perintah: {{message}}",
+			"unknownError": "Error tidak diketahui"
+		},
+		"progress": {
+			"generatingCommand": "Menghasilkan perintah..."
+		},
+		"info": {
+			"commandGenerated": "Perintah dihasilkan: {{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "Organisasi kamu memerlukan autentikasi Roo Code Cloud. Silakan masuk untuk melanjutkan.",

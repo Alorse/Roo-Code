@@ -5,7 +5,6 @@ import { anthropicModels } from "./anthropic.js"
 export type ClaudeCodeModelId = keyof typeof claudeCodeModels
 export const claudeCodeDefaultModelId: ClaudeCodeModelId = "claude-sonnet-4-20250514"
 export const claudeCodeModels = {
-<<<<<<< HEAD
 	"claude-sonnet-4-20250514": {
 		...anthropicModels["claude-sonnet-4-20250514"],
 		supportsImages: false,
@@ -46,11 +45,4 @@ export const claudeCodeModels = {
 		supportsReasoningBudget: false,
 		requiredReasoningBudget: false,
 	},
-=======
-	"claude-sonnet-4-20250514": anthropicModels["claude-sonnet-4-20250514"],
-	"claude-opus-4-20250514": anthropicModels["claude-opus-4-20250514"],
-	"claude-3-7-sonnet-20250219": anthropicModels["claude-3-7-sonnet-20250219"],
-	"claude-3-5-sonnet-20241022": anthropicModels["claude-3-5-sonnet-20241022"],
-	"claude-3-5-haiku-20241022": anthropicModels["claude-3-5-haiku-20241022"],
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
 } as const satisfies Record<string, ModelInfo>

@@ -120,7 +120,6 @@
 				"description": "Claude Code CLI'nizin isteğe bağlı yolu. Ayarlanmazsa varsayılan olarak 'claude' olur.",
 				"placeholder": "Varsayılan: claude"
 			}
-<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -133,8 +132,29 @@
 			"resetFailed": "Özel modları sıfırlama başarısız: {{error}}",
 			"modeNotFound": "Yazma hatası: Mod bulunamadı",
 			"noWorkspaceForProject": "Proje özel modu için çalışma alanı klasörü bulunamadı"
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
+		}
+	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} komut oluşturmak için",
+			"tooltip": "AI ile terminal komutu oluştur"
+		},
+		"inputBox": {
+			"title": "Terminal Komutu Oluştur",
+			"placeholder": "Komut talimatları (örn. 'Geçerli dizindeki dosyaları listele')"
+		},
+		"errors": {
+			"noActiveTerminal": "Etkin terminal bulunamadı",
+			"couldNotExtractCommand": "Yanıtından geçerli bir komut çıkarılamadı",
+			"failedToGenerate": "Komut oluşturulamadı",
+			"generationError": "Komut oluşturulurken hata oluştu: {{message}}",
+			"unknownError": "Bilinmeyen hata"
+		},
+		"progress": {
+			"generatingCommand": "Komut oluşturuluyor..."
+		},
+		"info": {
+			"commandGenerated": "Komut oluşturuldu: {{command}}"
 		}
 	},
 	"mdm": {

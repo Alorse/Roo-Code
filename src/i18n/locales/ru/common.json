@@ -120,7 +120,6 @@
 				"description": "Необязательный путь к вашему CLI Claude Code. По умолчанию 'claude', если не установлено.",
 				"placeholder": "По умолчанию: claude"
 			}
-<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -133,8 +132,29 @@
 			"resetFailed": "Не удалось сбросить пользовательские режимы: {{error}}",
 			"modeNotFound": "Ошибка записи: Режим не найден",
 			"noWorkspaceForProject": "Не найдена папка рабочего пространства для режима, специфичного для проекта"
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
+		}
+	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} для генерации команды",
+			"tooltip": "Генерировать команду терминала с помощью ИИ"
+		},
+		"inputBox": {
+			"title": "Генерировать команду терминала",
+			"placeholder": "Инструкции по команде (например, 'Вывести список файлов в текущей директории')"
+		},
+		"errors": {
+			"noActiveTerminal": "Активный терминал не найден",
+			"couldNotExtractCommand": "Не удалось извлечь допустимую команду из ответа",
+			"failedToGenerate": "Не удалось сгенерировать команду",
+			"generationError": "Ошибка при генерации команды: {{message}}",
+			"unknownError": "Неизвестная ошибка"
+		},
+		"progress": {
+			"generatingCommand": "Генерация команды..."
+		},
+		"info": {
+			"commandGenerated": "Команда сгенерирована: {{command}}"
 		}
 	},
 	"mdm": {

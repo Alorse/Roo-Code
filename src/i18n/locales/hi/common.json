@@ -120,7 +120,6 @@
 				"description": "आपके क्लाउड कोड CLI का वैकल्पिक पाथ। सेट न होने पर डिफ़ॉल्ट रूप से 'claude'。",
 				"placeholder": "डिफ़ॉल्ट: claude"
 			}
-<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -133,8 +132,29 @@
 			"resetFailed": "कस्टम मोड रीसेट विफल: {{error}}",
 			"modeNotFound": "लेखन त्रुटि: मोड नहीं मिला",
 			"noWorkspaceForProject": "प्रोजेक्ट-विशिष्ट मोड के लिए वर्कस्पेस फ़ोल्डर नहीं मिला"
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
+		}
+	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} कमांड उत्पन्न करने के लिए",
+			"tooltip": "AI के साथ टर्मिनल कमांड उत्पन्न करें"
+		},
+		"inputBox": {
+			"title": "टर्मिनल कमांड उत्पन्न करें",
+			"placeholder": "कमांड निर्देश (उदाहरण: 'वर्तमान डायरेक्टरी में फाइलें सूचीबद्ध करें')"
+		},
+		"errors": {
+			"noActiveTerminal": "कोई सक्रिय टर्मिनल नहीं मिला",
+			"couldNotExtractCommand": "प्रतिक्रिया से एक वैध कमांड नहीं निकाला जा सका",
+			"failedToGenerate": "कमांड उत्पन्न करने में विफल",
+			"generationError": "कमांड उत्पन्न करने में त्रुटि: {{message}}",
+			"unknownError": "अज्ञात त्रुटि"
+		},
+		"progress": {
+			"generatingCommand": "कमांड उत्पन्न हो रहा है..."
+		},
+		"info": {
+			"commandGenerated": "कमांड उत्पन्न हुआ: {{command}}"
 		}
 	},
 	"mdm": {

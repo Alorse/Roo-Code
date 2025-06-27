@@ -120,7 +120,6 @@
 				"description": "Chemin optionnel vers votre CLI Claude Code. Par défaut 'claude' si non défini.",
 				"placeholder": "Par défaut : claude"
 			}
-<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -133,8 +132,29 @@
 			"resetFailed": "Échec de la réinitialisation des modes personnalisés : {{error}}",
 			"modeNotFound": "Erreur d'écriture : Mode non trouvé",
 			"noWorkspaceForProject": "Aucun dossier d'espace de travail trouvé pour le mode spécifique au projet"
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
+		}
+	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} pour générer la commande",
+			"tooltip": "Générer une commande de terminal avec l'IA"
+		},
+		"inputBox": {
+			"title": "Générer une commande de terminal",
+			"placeholder": "Instructions de la commande (ex. : 'Lister les fichiers dans le répertoire actuel')"
+		},
+		"errors": {
+			"noActiveTerminal": "Aucun terminal actif trouvé",
+			"couldNotExtractCommand": "Impossible d'extraire une commande valide de la réponse",
+			"failedToGenerate": "Échec de la génération de la commande",
+			"generationError": "Erreur lors de la génération de la commande : {{message}}",
+			"unknownError": "Erreur inconnue"
+		},
+		"progress": {
+			"generatingCommand": "Génération de la commande..."
+		},
+		"info": {
+			"commandGenerated": "Commande générée : {{command}}"
 		}
 	},
 	"mdm": {

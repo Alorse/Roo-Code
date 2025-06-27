@@ -120,7 +120,6 @@
 				"description": "Đường dẫn tùy chọn đến CLI Claude Code của bạn. Mặc định là 'claude' nếu không được đặt.",
 				"placeholder": "Mặc định: claude"
 			}
-<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -133,8 +132,29 @@
 			"resetFailed": "Đặt lại chế độ tùy chỉnh thất bại: {{error}}",
 			"modeNotFound": "Lỗi ghi: Không tìm thấy chế độ",
 			"noWorkspaceForProject": "Không tìm thấy thư mục workspace cho chế độ dành riêng cho dự án"
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
+		}
+	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} để tạo lệnh",
+			"tooltip": "Tạo lệnh terminal bằng AI"
+		},
+		"inputBox": {
+			"title": "Tạo Lệnh Terminal",
+			"placeholder": "Hướng dẫn lệnh (ví dụ: 'Liệt kê các tệp trong thư mục hiện tại')"
+		},
+		"errors": {
+			"noActiveTerminal": "Không tìm thấy terminal hoạt động",
+			"couldNotExtractCommand": "Không thể trích xuất lệnh hợp lệ từ phản hồi",
+			"failedToGenerate": "Không thể tạo lệnh",
+			"generationError": "Lỗi khi tạo lệnh: {{message}}",
+			"unknownError": "Lỗi không xác định"
+		},
+		"progress": {
+			"generatingCommand": "Đang tạo lệnh..."
+		},
+		"info": {
+			"commandGenerated": "Lệnh đã tạo: {{command}}"
 		}
 	},
 	"mdm": {

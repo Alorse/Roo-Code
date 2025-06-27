@@ -120,7 +120,6 @@
 				"description": "Ruta opcional a la teva CLI de Claude Code. Per defecte 'claude' si no s'estableix.",
 				"placeholder": "Per defecte: claude"
 			}
-<<<<<<< HEAD
 		}
 	},
 	"customModes": {
@@ -133,8 +132,29 @@
 			"resetFailed": "Error en restablir els modes personalitzats: {{error}}",
 			"modeNotFound": "Error d'escriptura: Mode no trobat",
 			"noWorkspaceForProject": "No s'ha trobat cap carpeta d'espai de treball per al mode específic del projecte"
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
+		}
+	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} per generar comanda",
+			"tooltip": "Generar comanda de terminal amb IA"
+		},
+		"inputBox": {
+			"title": "Generar comanda de terminal",
+			"placeholder": "Instruccions de la comanda (p. ex., 'Llistar fitxers al directori actual')"
+		},
+		"errors": {
+			"noActiveTerminal": "No s'ha trobat cap terminal actiu",
+			"couldNotExtractCommand": "No s'ha pogut extreure una comanda vàlida de la resposta",
+			"failedToGenerate": "No s'ha pogut generar la comanda",
+			"generationError": "Error en generar la comanda: {{message}}",
+			"unknownError": "Error desconegut"
+		},
+		"progress": {
+			"generatingCommand": "Generant comanda..."
+		},
+		"info": {
+			"commandGenerated": "Comanda generada: {{command}}"
 		}
 	},
 	"mdm": {

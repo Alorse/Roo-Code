@@ -110,6 +110,11 @@ export async function activate(context: vscode.ExtensionContext) {
 	const provider = new ClineProvider(context, outputChannel, "sidebar", contextProxy, codeIndexManager, mdmService)
 	TelemetryService.instance.setProvider(provider)
 
+	// Initialize terminal command input
+	const { TerminalCommandInput } = await import("./core/terminal/TerminalCommandInput")
+	const terminalCommandInput = TerminalCommandInput.getInstance(context, provider)
+	context.subscriptions.push(terminalCommandInput)
+
 	if (codeIndexManager) {
 		context.subscriptions.push(codeIndexManager)
 	}

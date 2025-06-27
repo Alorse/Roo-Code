@@ -122,7 +122,6 @@
 			}
 		}
 	},
-<<<<<<< HEAD
 	"customModes": {
 		"errors": {
 			"yamlParseError": "Ongeldige YAML in .roomodes bestand op regel {{line}}. Controleer:\n• Juiste inspringing (gebruik spaties, geen tabs)\n• Overeenkomende aanhalingstekens en haakjes\n• Geldige YAML syntaxis",
@@ -135,8 +134,29 @@
 			"noWorkspaceForProject": "Geen workspace map gevonden voor projectspecifieke modus"
 		}
 	},
-=======
->>>>>>> 4fa735de3 (feat: add Claude Code provider for local CLI integration (#4864))
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} om commando te genereren",
+			"tooltip": "Genereer terminalcommando met AI"
+		},
+		"inputBox": {
+			"title": "Genereer Terminalcommando",
+			"placeholder": "Commando-instructies (bijv. 'Lijst bestanden in huidige map')"
+		},
+		"errors": {
+			"noActiveTerminal": "Geen actieve terminal gevonden",
+			"couldNotExtractCommand": "Kon geen geldig commando uit het antwoord extraheren",
+			"failedToGenerate": "Genereren van commando mislukt",
+			"generationError": "Fout bij genereren van commando: {{message}}",
+			"unknownError": "Onbekende fout"
+		},
+		"progress": {
+			"generatingCommand": "Commando genereren..."
+		},
+		"info": {
+			"commandGenerated": "Commando gegenereerd: {{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "Je organisatie vereist Roo Code Cloud-authenticatie. Log in om door te gaan.",

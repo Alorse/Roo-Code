@@ -124,6 +124,29 @@
 			"noWorkspaceForProject": "No workspace folder found for project-specific mode"
 		}
 	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} to generate command",
+			"tooltip": "Generate terminal command with AI"
+		},
+		"inputBox": {
+			"title": "Generate Terminal Command",
+			"placeholder": "Command instructions (e.g., 'List files in current directory')"
+		},
+		"errors": {
+			"noActiveTerminal": "No active terminal found",
+			"couldNotExtractCommand": "Could not extract a valid command from the response",
+			"failedToGenerate": "Failed to generate command",
+			"generationError": "Error generating command: {{message}}",
+			"unknownError": "Unknown error"
+		},
+		"progress": {
+			"generatingCommand": "Generating command..."
+		},
+		"info": {
+			"commandGenerated": "Command generated: {{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "Your organization requires Roo Code Cloud authentication. Please sign in to continue.",
