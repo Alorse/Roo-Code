@@ -134,6 +134,29 @@
 			"noWorkspaceForProject": "Nie znaleziono folderu obszaru roboczego dla trybu specyficznego dla projektu"
 		}
 	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} aby wygenerować polecenie",
+			"tooltip": "Generuj polecenie terminala za pomocą AI"
+		},
+		"inputBox": {
+			"title": "Generuj polecenie terminala",
+			"placeholder": "Instrukcje polecenia (np. 'Wyświetl pliki w bieżącym katalogu')"
+		},
+		"errors": {
+			"noActiveTerminal": "Nie znaleziono aktywnego terminala",
+			"couldNotExtractCommand": "Nie można było wyodrębnić prawidłowego polecenia z odpowiedzi",
+			"failedToGenerate": "Nie udało się wygenerować polecenia",
+			"generationError": "Błąd podczas generowania polecenia: {{message}}",
+			"unknownError": "Nieznany błąd"
+		},
+		"progress": {
+			"generatingCommand": "Generowanie polecenia..."
+		},
+		"info": {
+			"commandGenerated": "Polecenie wygenerowane: {{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "Twoja organizacja wymaga uwierzytelnienia Roo Code Cloud. Zaloguj się, aby kontynuować.",

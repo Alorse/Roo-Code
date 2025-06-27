@@ -134,6 +134,29 @@
 			"noWorkspaceForProject": "Не найдена папка рабочего пространства для режима, специфичного для проекта"
 		}
 	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} для генерации команды",
+			"tooltip": "Генерировать команду терминала с помощью ИИ"
+		},
+		"inputBox": {
+			"title": "Генерировать команду терминала",
+			"placeholder": "Инструкции по команде (например, 'Вывести список файлов в текущей директории')"
+		},
+		"errors": {
+			"noActiveTerminal": "Активный терминал не найден",
+			"couldNotExtractCommand": "Не удалось извлечь допустимую команду из ответа",
+			"failedToGenerate": "Не удалось сгенерировать команду",
+			"generationError": "Ошибка при генерации команды: {{message}}",
+			"unknownError": "Неизвестная ошибка"
+		},
+		"progress": {
+			"generatingCommand": "Генерация команды..."
+		},
+		"info": {
+			"commandGenerated": "Команда сгенерирована: {{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "Ваша организация требует аутентификации Roo Code Cloud. Войдите в систему, чтобы продолжить.",

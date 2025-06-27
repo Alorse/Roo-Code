@@ -134,6 +134,29 @@
 			"noWorkspaceForProject": "Nessuna cartella workspace trovata per la modalità specifica del progetto"
 		}
 	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} per generare il comando",
+			"tooltip": "Genera comando terminale con AI"
+		},
+		"inputBox": {
+			"title": "Genera Comando Terminale",
+			"placeholder": "Istruzioni del comando (es. 'Elenca i file nella directory corrente')"
+		},
+		"errors": {
+			"noActiveTerminal": "Nessun terminale attivo trovato",
+			"couldNotExtractCommand": "Impossibile estrarre un comando valido dalla risposta",
+			"failedToGenerate": "Impossibile generare il comando",
+			"generationError": "Errore durante la generazione del comando: {{message}}",
+			"unknownError": "Errore sconosciuto"
+		},
+		"progress": {
+			"generatingCommand": "Generazione comando in corso..."
+		},
+		"info": {
+			"commandGenerated": "Comando generato: {{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "La tua organizzazione richiede l'autenticazione Roo Code Cloud. Accedi per continuare.",

@@ -134,6 +134,29 @@
 			"noWorkspaceForProject": "Proje özel modu için çalışma alanı klasörü bulunamadı"
 		}
 	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} komut oluşturmak için",
+			"tooltip": "AI ile terminal komutu oluştur"
+		},
+		"inputBox": {
+			"title": "Terminal Komutu Oluştur",
+			"placeholder": "Komut talimatları (örn. 'Geçerli dizindeki dosyaları listele')"
+		},
+		"errors": {
+			"noActiveTerminal": "Etkin terminal bulunamadı",
+			"couldNotExtractCommand": "Yanıtından geçerli bir komut çıkarılamadı",
+			"failedToGenerate": "Komut oluşturulamadı",
+			"generationError": "Komut oluşturulurken hata oluştu: {{message}}",
+			"unknownError": "Bilinmeyen hata"
+		},
+		"progress": {
+			"generatingCommand": "Komut oluşturuluyor..."
+		},
+		"info": {
+			"commandGenerated": "Komut oluşturuldu: {{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "Kuruluşunuz Roo Code Cloud kimlik doğrulaması gerektiriyor. Devam etmek için giriş yapın.",

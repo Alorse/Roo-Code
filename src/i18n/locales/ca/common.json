@@ -134,6 +134,29 @@
 			"noWorkspaceForProject": "No s'ha trobat cap carpeta d'espai de treball per al mode específic del projecte"
 		}
 	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} per generar comanda",
+			"tooltip": "Generar comanda de terminal amb IA"
+		},
+		"inputBox": {
+			"title": "Generar comanda de terminal",
+			"placeholder": "Instruccions de la comanda (p. ex., 'Llistar fitxers al directori actual')"
+		},
+		"errors": {
+			"noActiveTerminal": "No s'ha trobat cap terminal actiu",
+			"couldNotExtractCommand": "No s'ha pogut extreure una comanda vàlida de la resposta",
+			"failedToGenerate": "No s'ha pogut generar la comanda",
+			"generationError": "Error en generar la comanda: {{message}}",
+			"unknownError": "Error desconegut"
+		},
+		"progress": {
+			"generatingCommand": "Generant comanda..."
+		},
+		"info": {
+			"commandGenerated": "Comanda generada: {{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "La teva organització requereix autenticació de Roo Code Cloud. Si us plau, inicia sessió per continuar.",

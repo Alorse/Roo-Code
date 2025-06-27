@@ -134,6 +134,29 @@
 			"noWorkspaceForProject": "Kein Arbeitsbereich-Ordner für projektspezifischen Modus gefunden"
 		}
 	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} zum Generieren des Befehls",
+			"tooltip": "Terminalbefehl mit KI generieren"
+		},
+		"inputBox": {
+			"title": "Terminalbefehl generieren",
+			"placeholder": "Befehlsanweisungen (z.B. 'Dateien im aktuellen Verzeichnis auflisten')"
+		},
+		"errors": {
+			"noActiveTerminal": "Kein aktives Terminal gefunden",
+			"couldNotExtractCommand": "Konnte keinen gültigen Befehl aus der Antwort extrahieren",
+			"failedToGenerate": "Fehler beim Generieren des Befehls",
+			"generationError": "Fehler beim Generieren des Befehls: {{message}}",
+			"unknownError": "Unbekannter Fehler"
+		},
+		"progress": {
+			"generatingCommand": "Befehl wird generiert..."
+		},
+		"info": {
+			"commandGenerated": "Befehl generiert: {{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "Deine Organisation erfordert eine Roo Code Cloud-Authentifizierung. Bitte melde dich an, um fortzufahren.",

@@ -134,6 +134,29 @@
 			"noWorkspaceForProject": "प्रोजेक्ट-विशिष्ट मोड के लिए वर्कस्पेस फ़ोल्डर नहीं मिला"
 		}
 	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} कमांड उत्पन्न करने के लिए",
+			"tooltip": "AI के साथ टर्मिनल कमांड उत्पन्न करें"
+		},
+		"inputBox": {
+			"title": "टर्मिनल कमांड उत्पन्न करें",
+			"placeholder": "कमांड निर्देश (उदाहरण: 'वर्तमान डायरेक्टरी में फाइलें सूचीबद्ध करें')"
+		},
+		"errors": {
+			"noActiveTerminal": "कोई सक्रिय टर्मिनल नहीं मिला",
+			"couldNotExtractCommand": "प्रतिक्रिया से एक वैध कमांड नहीं निकाला जा सका",
+			"failedToGenerate": "कमांड उत्पन्न करने में विफल",
+			"generationError": "कमांड उत्पन्न करने में त्रुटि: {{message}}",
+			"unknownError": "अज्ञात त्रुटि"
+		},
+		"progress": {
+			"generatingCommand": "कमांड उत्पन्न हो रहा है..."
+		},
+		"info": {
+			"commandGenerated": "कमांड उत्पन्न हुआ: {{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "आपके संगठन को Roo Code Cloud प्रमाणीकरण की आवश्यकता है। कृपया जारी रखने के लिए साइन इन करें।",

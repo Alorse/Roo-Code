@@ -134,6 +134,29 @@
 			"noWorkspaceForProject": "未找到專案特定模式的工作區資料夾"
 		}
 	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} 生成命令",
+			"tooltip": "使用 AI 生成終端機命令"
+		},
+		"inputBox": {
+			"title": "生成終端機命令",
+			"placeholder": "命令說明（例如：「列出目前目錄中的檔案」）"
+		},
+		"errors": {
+			"noActiveTerminal": "未找到作用中終端機",
+			"couldNotExtractCommand": "無法從回應中提取有效命令",
+			"failedToGenerate": "生成命令失敗",
+			"generationError": "生成命令時發生錯誤：{{message}}",
+			"unknownError": "未知錯誤"
+		},
+		"progress": {
+			"generatingCommand": "正在生成命令..."
+		},
+		"info": {
+			"commandGenerated": "命令已生成：{{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "您的組織需要 Roo Code Cloud 身份驗證。請登入以繼續。",

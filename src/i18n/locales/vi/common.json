@@ -134,6 +134,29 @@
 			"noWorkspaceForProject": "Không tìm thấy thư mục workspace cho chế độ dành riêng cho dự án"
 		}
 	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} để tạo lệnh",
+			"tooltip": "Tạo lệnh terminal bằng AI"
+		},
+		"inputBox": {
+			"title": "Tạo Lệnh Terminal",
+			"placeholder": "Hướng dẫn lệnh (ví dụ: 'Liệt kê các tệp trong thư mục hiện tại')"
+		},
+		"errors": {
+			"noActiveTerminal": "Không tìm thấy terminal hoạt động",
+			"couldNotExtractCommand": "Không thể trích xuất lệnh hợp lệ từ phản hồi",
+			"failedToGenerate": "Không thể tạo lệnh",
+			"generationError": "Lỗi khi tạo lệnh: {{message}}",
+			"unknownError": "Lỗi không xác định"
+		},
+		"progress": {
+			"generatingCommand": "Đang tạo lệnh..."
+		},
+		"info": {
+			"commandGenerated": "Lệnh đã tạo: {{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "Tổ chức của bạn yêu cầu xác thực Roo Code Cloud. Vui lòng đăng nhập để tiếp tục.",

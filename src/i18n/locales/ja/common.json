@@ -134,6 +134,29 @@
 			"noWorkspaceForProject": "プロジェクト固有モード用のワークスペースフォルダーが見つかりません"
 		}
 	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} でコマンドを生成",
+			"tooltip": "AIでターミナルコマンドを生成"
+		},
+		"inputBox": {
+			"title": "ターミナルコマンドを生成",
+			"placeholder": "コマンドの指示（例：「現在のディレクトリのファイルを一覧表示」）"
+		},
+		"errors": {
+			"noActiveTerminal": "アクティブなターミナルが見つかりません",
+			"couldNotExtractCommand": "応答から有効なコマンドを抽出できませんでした",
+			"failedToGenerate": "コマンドの生成に失敗しました",
+			"generationError": "コマンドの生成中にエラーが発生しました：{{message}}",
+			"unknownError": "不明なエラー"
+		},
+		"progress": {
+			"generatingCommand": "コマンドを生成中..."
+		},
+		"info": {
+			"commandGenerated": "コマンドが生成されました：{{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "あなたの組織では Roo Code Cloud 認証が必要です。続行するにはサインインしてください。",

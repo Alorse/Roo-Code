@@ -134,6 +134,29 @@
 			"noWorkspaceForProject": "Geen workspace map gevonden voor projectspecifieke modus"
 		}
 	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} om commando te genereren",
+			"tooltip": "Genereer terminalcommando met AI"
+		},
+		"inputBox": {
+			"title": "Genereer Terminalcommando",
+			"placeholder": "Commando-instructies (bijv. 'Lijst bestanden in huidige map')"
+		},
+		"errors": {
+			"noActiveTerminal": "Geen actieve terminal gevonden",
+			"couldNotExtractCommand": "Kon geen geldig commando uit het antwoord extraheren",
+			"failedToGenerate": "Genereren van commando mislukt",
+			"generationError": "Fout bij genereren van commando: {{message}}",
+			"unknownError": "Onbekende fout"
+		},
+		"progress": {
+			"generatingCommand": "Commando genereren..."
+		},
+		"info": {
+			"commandGenerated": "Commando gegenereerd: {{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "Je organisatie vereist Roo Code Cloud-authenticatie. Log in om door te gaan.",

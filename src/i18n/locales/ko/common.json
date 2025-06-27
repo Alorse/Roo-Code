@@ -134,6 +134,29 @@
 			"noWorkspaceForProject": "프로젝트별 모드용 작업 공간 폴더를 찾을 수 없습니다"
 		}
 	},
+	"terminalCommand": {
+		"statusBar": {
+			"text": "$(terminal) {{shortcut}} 명령 생성",
+			"tooltip": "AI로 터미널 명령 생성"
+		},
+		"inputBox": {
+			"title": "터미널 명령 생성",
+			"placeholder": "명령 지침 (예: '현재 디렉토리의 파일 나열')"
+		},
+		"errors": {
+			"noActiveTerminal": "활성 터미널을 찾을 수 없습니다",
+			"couldNotExtractCommand": "응답에서 유효한 명령을 추출할 수 없습니다",
+			"failedToGenerate": "명령 생성 실패",
+			"generationError": "명령 생성 오류: {{message}}",
+			"unknownError": "알 수 없는 오류"
+		},
+		"progress": {
+			"generatingCommand": "명령 생성 중..."
+		},
+		"info": {
+			"commandGenerated": "명령 생성됨: {{command}}"
+		}
+	},
 	"mdm": {
 		"errors": {
 			"cloud_auth_required": "조직에서 Roo Code Cloud 인증이 필요합니다. 계속하려면 로그인하세요.",
