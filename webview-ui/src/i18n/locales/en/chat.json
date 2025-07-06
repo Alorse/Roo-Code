@@ -64,7 +64,7 @@
 		}
 	},
 	"runCommand": {
-		"title": "Run",
+		"title": "Run Command",
 		"tooltip": "Execute this command"
 	},
 	"proceedWhileRunning": {
@@ -72,7 +72,7 @@
 		"tooltip": "Continue despite warnings"
 	},
 	"killCommand": {
-		"title": "Kill",
+		"title": "Kill Command",
 		"tooltip": "Kill the current command"
 	},
 	"resumeTask": {
@@ -125,7 +125,7 @@
 	"addContext": "@ to add context, / to switch modes",
 	"dragFiles": "hold shift to drag in files",
 	"dragFilesImages": "hold shift to drag in files/images",
-	"errorReadingFile": "Error reading file",
+	"errorReadingFile": "Error reading file:",
 	"noValidImages": "No valid images were processed",
 	"separator": "Separator",
 	"edit": "Edit...",
@@ -161,64 +161,65 @@
 		"tokens": "tokens"
 	},
 	"instructions": {
-		"wantsToFetch": " fetch detailed instructions to assist with the current task"
+		"wantsToFetch": "Roo wants to fetch detailed instructions to assist with the current task"
 	},
 	"fileOperations": {
-		"wantsToRead": "Read",
-		"wantsToReadMultiple": "Read files",
-		"wantsToReadAndXMore": "Read and {{count}} more",
-		"wantsToReadOutsideWorkspace": "Read this file outside",
-		"didRead": "Read",
-		"wantsToEdit": "Edit",
-		"wantsToEditOutsideWorkspace": "Edit outside of the workspace",
-		"wantsToEditProtected": " edit a protected configuration file",
-		"wantsToApplyBatchChanges": " apply changes to multiple files",
-		"wantsToCreate": "Create",
-		"wantsToSearchReplace": " search and replace in this file",
-		"didSearchReplace": "Roo performed search and replace on this file",
-		"wantsToInsert": "Insert",
-		"wantsToInsertWithLineNumber": "Insert at line {{lineNumber}}",
-		"wantsToInsertAtEnd": " append content to the end of this file"
+		"wantsToRead": "Roo wants to read this file:",
+		"wantsToReadMultiple": "Roo wants to read multiple files:",
+		"wantsToReadAndXMore": "Roo wants to read this file and {{count}} more:",
+		"wantsToReadOutsideWorkspace": "Roo wants to read this file outside of the workspace:",
+		"didRead": "Roo read this file:",
+		"wantsToEdit": "Roo wants to edit this file:",
+		"wantsToEditOutsideWorkspace": "Roo wants to edit this file outside of the workspace:",
+		"wantsToEditProtected": "Roo wants to edit a protected configuration file:",
+		"wantsToApplyBatchChanges": "Roo wants to apply changes to multiple files:",
+		"wantsToCreate": "Roo wants to create a new file:",
+		"wantsToSearchReplace": "Roo wants to search and replace in this file:",
+		"didSearchReplace": "Roo performed search and replace on this file:",
+		"wantsToInsert": "Roo wants to insert content into this file:",
+		"wantsToInsertWithLineNumber": "Roo wants to insert content into this file at line {{lineNumber}}:",
+		"wantsToInsertAtEnd": "Roo wants to append content to the end of this file:"
 	},
 	"directoryOperations": {
-		"wantsToViewTopLevel": "View",
-		"didViewTopLevel": "View",
-		"wantsToViewTopLevelOutsideWorkspace": "View (outside workspace)",
-		"didViewTopLevelOutsideWorkspace": "View (outside workspace)",
-		"wantsToViewRecursive": "View files",
-		"didViewRecursive": "View",
-		"wantsToViewRecursiveOutsideWorkspace": "View files (outside workspace)",
-		"didViewRecursiveOutsideWorkspace": "Roo recursively viewed all files in this directory (outside workspace)",
-		"wantsToViewDefinitions": " view source code definition names used in this directory",
-		"didViewDefinitions": "Roo viewed source code definition names used in this directory",
-		"wantsToViewDefinitionsOutsideWorkspace": " view source code definition names used in this directory (outside workspace)",
-		"didViewDefinitionsOutsideWorkspace": "Roo viewed source code definition names used in this directory (outside workspace)",
-		"wantsToSearch": " search this directory for <code>{{regex}}</code>",
-		"didSearch": "Roo searched this directory for <code>{{regex}}</code>",
-		"wantsToSearchOutsideWorkspace": " search this directory (outside workspace) for <code>{{regex}}</code>",
-		"didSearchOutsideWorkspace": "Roo searched this directory (outside workspace) for <code>{{regex}}</code>"
+		"wantsToViewTopLevel": "Roo wants to view the top level files in this directory:",
+		"didViewTopLevel": "Roo viewed the top level files in this directory:",
+		"wantsToViewTopLevelOutsideWorkspace": "Roo wants to view the top level files in this directory (outside workspace):",
+		"didViewTopLevelOutsideWorkspace": "Roo viewed the top level files in this directory (outside workspace):",
+		"wantsToViewRecursive": "Roo wants to recursively view all files in this directory:",
+		"didViewRecursive": "Roo recursively viewed all files in this directory:",
+		"wantsToViewRecursiveOutsideWorkspace": "Roo wants to recursively view all files in this directory (outside workspace):",
+		"didViewRecursiveOutsideWorkspace": "Roo recursively viewed all files in this directory (outside workspace):",
+		"wantsToViewDefinitions": "Roo wants to view source code definition names used in this directory:",
+		"didViewDefinitions": "Roo viewed source code definition names used in this directory:",
+		"wantsToViewDefinitionsOutsideWorkspace": "Roo wants to view source code definition names used in this directory (outside workspace):",
+		"didViewDefinitionsOutsideWorkspace": "Roo viewed source code definition names used in this directory (outside workspace):",
+		"wantsToSearch": "Roo wants to search this directory for <code>{{regex}}</code>:",
+		"didSearch": "Roo searched this directory for <code>{{regex}}</code>:",
+		"wantsToSearchOutsideWorkspace": "Roo wants to search this directory (outside workspace) for <code>{{regex}}</code>:",
+		"didSearchOutsideWorkspace": "Roo searched this directory (outside workspace) for <code>{{regex}}</code>:"
 	},
 	"codebaseSearch": {
-		"wantsToSearch": " search the codebase for <code>{{query}}</code>",
-		"wantsToSearchWithPath": " search the codebase for <code>{{query}}</code> in <code>{{path}}</code>",
-		"didSearch": "Found {{count}} result(s) for <code>{{query}}</code>"
+		"wantsToSearch": "Roo wants to search the codebase for <code>{{query}}</code>:",
+		"wantsToSearchWithPath": "Roo wants to search the codebase for <code>{{query}}</code> in <code>{{path}}</code>:",
+		"didSearch": "Found {{count}} result(s) for <code>{{query}}</code>:",
+		"resultTooltip": "Similarity score: {{score}} (click to open file)"
 	},
 	"commandOutput": "Command Output",
 	"response": "Response",
 	"arguments": "Arguments",
 	"mcp": {
-		"wantsToUseTool": " use a tool on the {{serverName}} MCP server",
-		"wantsToAccessResource": " access a resource on the {{serverName}} MCP server"
+		"wantsToUseTool": "Roo wants to use a tool on the {{serverName}} MCP server:",
+		"wantsToAccessResource": "Roo wants to access a resource on the {{serverName}} MCP server:"
 	},
 	"modes": {
-		"wantsToSwitch": " switch to {{mode}} mode",
-		"wantsToSwitchWithReason": " switch to {{mode}} mode because: {{reason}}",
+		"wantsToSwitch": "Roo wants to switch to {{mode}} mode",
+		"wantsToSwitchWithReason": "Roo wants to switch to {{mode}} mode because: {{reason}}",
 		"didSwitch": "Roo switched to {{mode}} mode",
 		"didSwitchWithReason": "Roo switched to {{mode}} mode because: {{reason}}"
 	},
 	"subtasks": {
-		"wantsToCreate": " create a new subtask in {{mode}} mode",
-		"wantsToFinish": " finish this subtask",
+		"wantsToCreate": "Roo wants to create a new subtask in {{mode}} mode:",
+		"wantsToFinish": "Roo wants to finish this subtask",
 		"newTaskContent": "Subtask Instructions",
 		"completionContent": "Subtask Completed",
 		"resultContent": "Subtask Results",
@@ -226,7 +227,7 @@
 		"completionInstructions": "Subtask completed! You can review the results and suggest any corrections or next steps. If everything looks good, confirm to return the result to the parent task."
 	},
 	"questions": {
-		"hasQuestion": "Question"
+		"hasQuestion": "Roo has a question:"
 	},
 	"taskCompleted": "Task Completed",
 	"error": "Error",
@@ -238,17 +239,17 @@
 		"issues": "It seems like you're having Windows PowerShell issues, please see this"
 	},
 	"autoApprove": {
-		"title": "Auto-approve",
+		"title": "Auto-approve:",
 		"none": "None",
 		"description": "Auto-approve allows Roo Code to perform actions without asking for permission. Only enable for actions you fully trust. More detailed configuration available in <settingsLink>Settings</settingsLink>."
 	},
 	"announcement": {
 		"title": "🎉 Roo Code {{version}} Released",
-		"description": "Roo Code {{version}} brings major new features and improvements based on your feedback.",
+		"description": "Roo Code {{version}} brings powerful new features and significant improvements to enhance your development workflow.",
 		"whatsNew": "What's New",
-		"feature1": "<bold>Roo Marketplace Launch</bold>: The marketplace is now live! Discover and install modes and MCPs easier than ever before.",
-		"feature2": "<bold>Gemini 2.5 Models</bold>: Added support for new Gemini 2.5 Pro, Flash, and Flash Lite models.",
-		"feature3": "<bold>Excel File Support & More</bold>: Added Excel (.xlsx) file support and numerous bug fixes and improvements!",
+		"feature1": "<bold>1-Click Task Sharing</bold>: Share your tasks instantly with colleagues and the community with a single click.",
+		"feature2": "<bold>Global .roo Directory Support</bold>: Load rules and configurations from a global .roo directory for consistent settings across projects.",
+		"feature3": "<bold>Improved Architect to Code Transitions</bold>: Seamless handoffs from planning in Architect mode to implementation in Code mode.",
 		"hideButton": "Hide announcement",
 		"detailsDiscussLinks": "Get more details and discuss in <discordLink>Discord</discordLink> and <redditLink>Reddit</redditLink> 🚀"
 	},
@@ -257,10 +258,12 @@
 		"seconds": "{{count}}s"
 	},
 	"followUpSuggest": {
-		"copyToInput": "Copy to input (same as shift + click)"
+		"copyToInput": "Copy to input (same as shift + click)",
+		"autoSelectCountdown": "Auto-selecting in {{count}}s",
+		"countdownDisplay": "{{count}}s"
 	},
 	"browser": {
-		"rooWantsToUse": " use the browser",
+		"rooWantsToUse": "Roo wants to use the browser:",
 		"consoleLogs": "Console Logs",
 		"noNewLogs": "(No new logs)",
 		"screenshot": "Browser screenshot",
@@ -310,5 +313,8 @@
 		"indexed": "Indexed",
 		"error": "Index error",
 		"status": "Index status"
+	},
+	"versionIndicator": {
+		"ariaLabel": "Version {{version}} - Click to view release notes"
 	}
 }

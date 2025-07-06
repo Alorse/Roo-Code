@@ -38,6 +38,8 @@ export interface WebviewMessage {
 		| "alwaysAllowWriteOutsideWorkspace"
 		| "alwaysAllowWriteProtected"
 		| "alwaysAllowExecute"
+		| "alwaysAllowFollowupQuestions"
+		| "followupAutoApproveTimeoutMs"
 		| "webviewDidLaunch"
 		| "newTask"
 		| "askResponse"
@@ -140,6 +142,7 @@ export interface WebviewMessage {
 		| "humanRelayResponse"
 		| "humanRelayCancel"
 		| "browserToolEnabled"
+		| "codebaseIndexEnabled"
 		| "telemetrySetting"
 		| "showRooIgnoredFiles"
 		| "testBrowserConnection"
@@ -162,7 +165,6 @@ export interface WebviewMessage {
 		| "indexingStatusUpdate"
 		| "indexCleared"
 		| "focusPanelRequest"
-		| "codebaseIndexConfig"
 		| "profileThresholds"
 		| "setHistoryPreviewCollapsed"
 		| "openExternal"
@@ -177,6 +179,14 @@ export interface WebviewMessage {
 		| "switchTab"
 		| "profileThresholds"
 		| "shareTaskSuccess"
+		| "exportMode"
+		| "exportModeResult"
+		| "importMode"
+		| "importModeResult"
+		| "checkRulesDirectory"
+		| "checkRulesDirectoryResult"
+		| "saveCodeIndexSettingsAtomic"
+		| "requestCodeIndexSecretStatus"
 	text?: string
 	tab?: "settings" | "history" | "mcp" | "modes" | "chat" | "marketplace" | "account"
 	disabled?: boolean
@@ -215,6 +225,26 @@ export interface WebviewMessage {
 	mpInstallOptions?: InstallMarketplaceItemOptions
 	config?: Record<string, any> // Add config to the payload
 	visibility?: ShareVisibility // For share visibility
+	hasContent?: boolean // For checkRulesDirectoryResult
+	checkOnly?: boolean // For deleteCustomMode check
+	codeIndexSettings?: {
+		// Global state settings
+		codebaseIndexEnabled: boolean
+		codebaseIndexQdrantUrl: string
+		codebaseIndexEmbedderProvider: "openai" | "ollama" | "openai-compatible" | "gemini"
+		codebaseIndexEmbedderBaseUrl?: string
+		codebaseIndexEmbedderModelId: string
+		codebaseIndexOpenAiCompatibleBaseUrl?: string
+		codebaseIndexOpenAiCompatibleModelDimension?: number
+		codebaseIndexSearchMaxResults?: number
+		codebaseIndexSearchMinScore?: number
+
+		// Secret settings
+		codeIndexOpenAiKey?: string
+		codeIndexQdrantApiKey?: string
+		codebaseIndexOpenAiCompatibleApiKey?: string
+		codebaseIndexGeminiApiKey?: string
+	}
 }
 
 export const checkoutDiffPayloadSchema = z.object({
