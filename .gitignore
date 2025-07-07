@@ -51,3 +51,5 @@ logs
 
 # Ignore memory-bank directory
 memory-bank/
+
+.local-changes/
